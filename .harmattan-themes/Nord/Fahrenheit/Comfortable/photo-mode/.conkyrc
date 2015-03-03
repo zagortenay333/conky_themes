@@ -1,0 +1,85 @@
+# Conky settings #
+background yes
+update_interval 1
+double_buffer yes
+no_buffers yes
+imlib_cache_size 10
+
+# Window specifications #
+gap_x 100
+gap_y 70
+minimum_size 268 390
+maximum_width 268
+own_window yes
+own_window_type normal  # other options are: override/dock/desktop/panel
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+border_inner_margin 0
+border_outer_margin 0
+#alignment middle_middle
+#own_window_argb_visual yes
+#own_window_argb_value 0
+
+# Graphics settings #
+draw_shades no
+default_shade_color AAAAAA
+draw_outline no
+default_outline_color AAAAAA
+draw_borders no
+
+# Text settings #
+use_xft yes
+xftalpha 0
+xftfont Droid Sans:size=10
+text_buffer_size 256
+override_utf8_locale yes
+
+# Color scheme #
+default_color 3A3A3A
+color1 3A3A3A
+color2 3A3A3A
+color3 6DB9D5
+color4 D56D6D
+color5 FFFFFF
+
+TEXT
+# Various images #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}\
+${execi 300 cp -f ~/.harmattan-assets/photos/big-0px/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 20,25 -s 228x229}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/border.png -p 12,17 -s 244x237}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/bottom-bg-2.png -p 12,254 -s 244x110}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/separator-v.png -p 95,270 -s 1x83}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/separator-v.png -p 172,270 -s 1x83}\
+\
+# The name of days #
+\
+${color2}${voffset 262}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}
+${color2}${voffset -17}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}
+${color2}${voffset -17}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}
+\
+# Temperatures #
+\
+${color2}${voffset 53}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+${color2}${voffset -17}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°
+${color2}${voffset -17}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°
+\
+# Weather conditions section #
+\
+${color5}${font Droid Sans:size=48}${goto 36}${voffset -198}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}\
+${color5}${alignr 56}${voffset -162}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color5}${alignr 56}${voffset 20}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} %
+${color5}${alignr 56}${voffset 20}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color5}${alignr 56}${voffset 20}${execi 300 grep "yweather:astronomy" ~/.cache/weather.xml | grep -o "sunrise=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color5}${alignr 56}${voffset 20}${execi 300 grep "yweather:astronomy" ~/.cache/weather.xml | grep -o "sunset=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color5}${font Droid Sans :size=12}${goto 46}${voffset 26}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}\
+\
+# Various images including the forecast icons #
+\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/pressure.png -p 222,37 -s 16x16}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/humidity.png -p 222,74 -s 16x16}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/wind-2.png -p 222,111 -s 16x16}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/sunrise.png -p 222,148 -s 16x16}\
+${image ~/.harmattan-assets/misc/Nord/Comfortable/sunset.png -p 222,185 -s 16x16}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-#3a3a3a/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,290 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-#3a3a3a/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,290 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-#3a3a3a/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,290 -s 32x32}${font}\

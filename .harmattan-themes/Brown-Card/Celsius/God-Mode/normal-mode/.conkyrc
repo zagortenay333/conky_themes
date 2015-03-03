@@ -1,0 +1,189 @@
+# Conky settings #
+background yes
+update_interval 1
+double_buffer yes
+no_buffers yes
+imlib_cache_size 10
+
+# Window specifications #
+gap_x 100
+gap_y 70
+minimum_size 268 620
+maximum_width 268
+own_window yes
+own_window_type normal  # other options are: override/dock/desktop/panel
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+border_inner_margin 0
+border_outer_margin 0
+#alignment middle_middle
+#own_window_argb_visual yes
+#own_window_argb_value 0
+
+# Graphics settings #
+draw_shades no
+default_shade_color AAAAAA
+draw_outline no
+default_outline_color AAAAAA
+draw_borders no
+draw_graph_borders no
+default_graph_size 26 80
+show_graph_scale no
+show_graph_range no
+
+# Text settings #
+use_xft yes
+xftalpha 0
+xftfont Droid Sans:size=8
+text_buffer_size 256
+override_utf8_locale yes
+
+# Useful shortenings #
+short_units yes
+pad_percents 2
+top_name_width 7
+
+# Color scheme #
+default_color e5ded0
+color1 e5ded0
+color2 948787
+color3 668694
+color4 FFFFFF
+color5 DCDCDC
+color6 FFFFFF
+color7 FFFFFF
+color8 FFFFFF
+
+TEXT
+# Various images #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/bg.png -p 10,20 -s 248x582}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/bg-1.png -p 20,90/ -s 228x182}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/bg-2.png -p 20,372/ -s 228x214}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/separator-v.png -p 95,185 -s 2x76}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/separator-v.png -p 172,185 -s 2x76}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/separator-h.png -p 33,175 -s 202x2}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/separator-h.png -p 33,496 -s 202x2}\
+\
+# The days of the forecast #
+\
+${color1}${voffset 172}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}${color}
+${color1}${voffset -13}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}${color}
+${color1}${voffset -13}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}${color}
+\
+# The temperatures of the forecast #
+\
+${color1}${voffset 51}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°${color}
+${color1}${voffset -13}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°${color}
+${color1}${voffset -13}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°${color}
+\
+# The "conditions" section of the conky #
+\
+${goto 36}${voffset -172}${font Droid Sans :size=36}${color1}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}${color}
+${goto 46}${voffset 14}${font Droid Sans :size=12}${color1}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}${color}
+${color1}${alignr 52}${voffset -73}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color1}${alignr 52}${voffset 7}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} %${color}
+${color1}${alignr 52}${voffset 7}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${color}
+\
+# Clock + calendar #
+\
+${voffset -117}${font Droid Sans Mono :size=22}${alignc}${color1}${time %H:%M}${font}${color}
+${voffset 4}${font Droid Sans :size=10}${alignc}${color2}${time %A, %B %d}${font}${color}
+\
+# Cpu, memory, uptime, and load graph #
+\
+${voffset 294}${goto 40}${color1}Cpu:${color}
+${voffset 4}${goto 40}${color1}Mem:${color}
+${voffset 4}${goto 40}${color1}Uptime:${color}
+${voffset -47}${alignr 39}${color1}${cpu cpu0}%${color}
+${voffset 4}${alignr 39}${color1}${memperc}%${color}
+${voffset 4}${alignr 39}${color1}${uptime_short}${color}
+${voffset -47}${alignc}${color2}${cpubar 5,36}${color}
+${voffset 4}${alignc}${color2}${membar 5,36}${color}
+${voffset 29}${goto 40}${loadgraph 26,190 948787 948787 -l}
+\
+# The processes section #
+\
+${voffset 26}${goto 40}${color1}${top_mem name 1}${color}
+${voffset 4}${goto 40}${color1}${top_mem name 2}${color}
+${voffset 4}${goto 40}${color1}${top_mem name 3}${color}
+${voffset 4}${goto 40}${color1}${top_mem name 4}${color}
+${voffset 4}${goto 40}${color1}${top_mem name 5}${color}
+${voffset -81}${alignc}${color2}${top_mem mem 1}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 2}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 3}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 4}%${color}
+${voffset 4}${alignc}${color2}${top_mem mem 5}%${color}
+${voffset -81}${alignr 39}${color1}${top_mem mem_res 1}${color}
+${voffset 4}${alignr 39}${color1}${top_mem mem_res 2}${color}
+${voffset 4}${alignr 39}${color1}${top_mem mem_res 3}${color}
+${voffset 4}${alignr 39}${color1}${top_mem mem_res 4}${color}
+${voffset 4}${alignr 39}${color1}${top_mem mem_res 5}${color}
+${voffset -104}${goto 40}${color1}Proc${color}
+${voffset -13}${alignc}${color1}Mem%${color}
+${voffset -13}${alignr 39}${color1}Mem${color}
+\
+# The network section #
+\
+${if_existing /proc/net/route ppp0}
+${voffset -227}${goto 40}${color2}Up: ${color1}${upspeed ppp0}${color2}${goto 150}Down: ${color1}${downspeed ppp0}
+${voffset 10}${goto 40}${upspeedgraph ppp0 26,80 948787 948787}${goto 150}${downspeedgraph ppp0 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup ppp0}${color2}${goto 150}Received: ${color1}${totaldown ppp0}
+${else}
+${if_existing /proc/net/route ppp1}
+${voffset -240}${goto 40}${color2}Up: ${color1}${upspeed ppp1}${color2}${goto 150}Down: ${color1}${downspeed ppp1}
+${voffset 10}${goto 40}${upspeedgraph ppp1 26,80 948787 948787}${goto 150}${downspeedgraph ppp1 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup ppp1}${color2}${goto 150}Received: ${color1}${totaldown ppp1}
+${else}
+${if_existing /proc/net/route wlp2s1}
+${voffset -253}${goto 40}${color2}Up: ${color1}${upspeed wlp2s1}${color2}${goto 150}Down: ${color1}${downspeed wlp2s1}
+${voffset 10}${goto 40}${upspeedgraph wlp2s1 26,80 948787 948787}${goto 150}${downspeedgraph wlp2s1 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup wlp2s1}${color2}${goto 150}Received: ${color1}${totaldown wlp2s1}
+${else}
+${if_existing /proc/net/route wlp2s0}
+${voffset -266}${goto 40}${color2}Up: ${color1}${upspeed wlp2s0}${color2}${goto 150}Down: ${color1}${downspeed wlp2s0}
+${voffset 10}${goto 40}${upspeedgraph wlp2s0 26,80 948787 948787}${goto 150}${downspeedgraph wlp2s0 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup wlp2s0}${color2}${goto 150}Received: ${color1}${totaldown wlp2s0}
+${else}
+${if_existing /proc/net/route wlan0}
+${voffset -279}${goto 40}${color2}Up: ${color1}${upspeed wlan0}${color2}${goto 150}Down: ${color1}${downspeed wlan0}
+${voffset 8}${goto 40}${upspeedgraph wlan0 26,80 948787 948787}${goto 150}${downspeedgraph wlan0 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup wlan0}${color2}${goto 150}Received: ${color1}${totaldown wlan0}
+${else}
+${if_existing /proc/net/route wlan1}
+${voffset -292}${goto 40}${color2}Up: ${color1}${upspeed wlan1}${color2}${goto 150}Down: ${color1}${downspeed wlan1}
+${voffset 10}${goto 40}${upspeedgraph wlan1 26,80 948787 948787}${goto 150}${downspeedgraph wlan1 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup wlan1}${color2}${goto 150}Received: ${color1}${totaldown wlan1}
+${else}
+${if_existing /proc/net/route eth1}
+${voffset -305}${goto 40}${color2}Up: ${color1}${upspeed eth1}${color2}${goto 150}Down: ${color1}${downspeed eth1}
+${voffset 10}${goto 40}${upspeedgraph eth1 26,80 948787 948787}${goto 150}${downspeedgraph eth1 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup eth1}${color2}${goto 150}Received: ${color1}${totaldown eth1}
+${else}
+${if_existing /proc/net/route eth0}
+${voffset -318}${goto 40}${color2}Up: ${color1}${upspeed eth0}${color2}${goto 150}Down: ${color1}${downspeed eth0}
+${voffset 10}${goto 40}${upspeedgraph eth0 26,80 948787 948787}${goto 150}${downspeedgraph eth0 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup eth0}${color2}${goto 150}Received: ${color1}${totaldown eth0}
+${else}
+${if_existing /proc/net/route enp0s0}
+${voffset -331}${goto 40}${color2}Up: ${color1}${upspeed enp0s0}${color2}${goto 150}Down: ${color1}${downspeed enp0s0}
+${voffset 10}${goto 40}${upspeedgraph enp0s0 26,80 948787 948787}${goto 150}${downspeedgraph enp0s0 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup enp0s0}${color2}${goto 150}Received: ${color1}${totaldown enp0s0}
+${else}
+${if_existing /proc/net/route enp0s1}
+${voffset -344}${goto 40}${color2}Up: ${color1}${upspeed enp0s1}${color2}${goto 150}Down: ${color1}${downspeed enp0s1}
+${voffset 10}${goto 40}${upspeedgraph enp0s1 26,80 948787 948787}${goto 150}${downspeedgraph enp0s1 26,80 948787 948787}
+${voffset 9}${goto 40}${color2}Sent: ${color1}${totalup enp0s1}${color2}${goto 150}Received: ${color1}${totaldown enp0s1}
+${else}
+${voffset -311}${goto 40}${color1}Network disconnected${color}
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/offline.png -p 44,284 -s 16x16}
+${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}
+\
+# Various images including the icons of the forecast #
+\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/pressure.png -p 224,95 -s 16x16}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/humidity.png -p 224,115 -s 16x16}\
+${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/wind-2.png -p 224,136 -s 16x16}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-#e5ded0/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 41,207 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-#e5ded0/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 119,207 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-#e5ded0/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 195,207 -s 32x32}${font}${voffset -120}\

@@ -1,0 +1,130 @@
+/*----- Installation ------*/
+
+    1. Some files/folders are hidden; Ctrl + H to unhide them.
+
+
+    2. Install curl.  (sudo apt-get install curl)
+    
+    
+    3. Move the ".harmattan-assets" folder into your home folder.
+    
+    
+    4. Each theme is a single text-file called .conkyrc. These files are inside the ".harmattan-themes" folder. They are separated across many folders for easier navigation.
+    
+    
+    5. Move your chosen .conkyrc file and put it into your home folder.
+    
+    
+    6. Open the terminal and type "conky" to start your conky.
+    
+    
+    7. In order to display the weather of your city, open your .conkyrc file and find the number "44418". This number is the WOEID(Where On Earth ID).
+In order to find the WOEID of your city, go to the Yahoo weather page and search for your city. You will find the WOEID of your city in the URL bar of your browser!
+ 
+
+
+
+/*------ Moving the conky around ------*/
+
+    
+  - In order to move the conky around, all you have to do is manipulate the numbers "gap_x" and "gap_y" in you ".conkyrc" file.
+    
+  - You can also position the conky using the "alignment" configuration. Find the line "#alignment middle_middle".
+First uncomment the line(remove the "#" symbol), then manipulate the value. Available options are middle_middle, top_left, bottom_right, etc.
+    
+  - Keep in mind that "gap_x" and "gap_y" still work after you activate "alignment", so either comment them out(add "#") or use them in combination with "alignment".
+
+
+
+            
+/*----- Themes -----*/
+    
+    
+    1. "Cards"
+            A simple and flat theme.
+    
+    
+    2. "Elementary"
+            Designed to fit into the default elementary OS theme. It imitates the styling of the panel popup menus.
+    
+    
+    3. "Elune"
+            Designed for the Elune cinnamon and gnome-shell themes.
+    
+    
+    4. "Flatts"
+            Inspired by the homonymous rainmeter skin by ~DesignByMichaels(on deviantART)
+            The colored bar at the top will go grey if you are disconnected from the interwebz ;) 
+    
+    
+    5. "Metro"
+            Inspired by the "modern UI" interface from Windows 8/8.1.
+    
+    
+    6. "New-Minty"
+            Designed for the New-Minty cinnamon theme.
+        
+    
+    7. "Nord"
+            Designed for the Nord cinnamon/gnome-shell themes.
+    
+    
+    8. "Numix"
+            Designed for https://numixproject.org/.
+    
+    
+    9. "Transparent"
+            A simple transparent theme.
+    
+    
+    10. "Ubuntu-Touch"
+            Inspired by Ubuntu Touch UI.
+    
+    
+    11. "Zukitwo"
+            Designed for the zukitwo cinnamon theme.
+    
+    
+    12. "Glass"
+            A simple and transluscent theme.
+            
+            
+    13. "Button"
+            A simple and colorful theme.
+            
+            
+    14. "Texture" 
+            A dark theme with a noisy texture.      
+
+
+    15. "OMG-Ubuntu!"
+            Inspired by the popular "OMG-Ubuntu!" website.
+
+
+    16. "Brown-Card"
+            A simple brown theme.
+
+
+    17. "Ciliora Prima"
+            Designed for the Ciliora-Prima theme.
+
+
+    18. "Ciliora-Prima-v2"
+            Designed for the Ciliora-Prima theme.
+
+
+    19. "Ciliora-Secunda"
+            Designed for the Ciliora-Secunda theme.
+
+
+    20. "Ciliora-Secunda-v2"
+            Designed for the Ciliora-Secunda theme.
+
+
+    21. "Ciliora-Tertia"
+            Designed for the Ciliora-Tertia theme.
+
+
+    22. "Ciliora-Tertia-v2"
+            Designed for the Ciliora-Tertia theme.
+            

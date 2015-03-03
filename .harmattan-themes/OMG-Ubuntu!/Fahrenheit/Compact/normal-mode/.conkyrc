@@ -1,0 +1,119 @@
+# Conky settings #
+background yes
+update_interval 1
+double_buffer yes
+no_buffers yes
+imlib_cache_size 10
+
+# Window specifications #
+gap_x 100
+gap_y 70
+minimum_size 268 270
+maximum_width 268
+own_window yes
+own_window_type normal  # other options are: override/dock/desktop/panel
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+border_inner_margin 0
+border_outer_margin 0
+#alignment middle_middle
+#own_window_argb_visual yes
+#own_window_argb_value 0
+
+# Graphics settings #
+draw_shades no
+default_shade_color AAAAAA
+draw_outline no
+default_outline_color AAAAAA
+draw_borders no
+
+# Text settings #
+use_xft yes
+xftalpha 0
+xftfont Droid Sans:size=10
+text_buffer_size 256
+override_utf8_locale yes
+
+# Color scheme #
+default_color 333333
+color1 FFFFFF
+color2 777777
+color3 777777
+color4 AAAAAA
+color5 A0D468
+color6 AC92EC
+color7 FC6E51
+color8 4FC0E9
+
+TEXT
+# Various images #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/border.png -p 19,24 -s 230x220}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/shadow.png -p 20,136 -s 228x110}\
+\
+# The name of the days #
+\
+${color1}${voffset 149}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}
+${color1}${voffset -17}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}
+${color1}${voffset -17}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}
+\
+# Temperatures #
+\
+${color1}${voffset 53}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+${color1}${voffset -17}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°
+${color1}${voffset -17}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°
+\
+# Conditions #
+\
+${color1}${font Droid Sans :size=36}${goto 36}${voffset -196}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}\
+${color1}${font Droid Sans :size=12}${goto 46}${voffset 33}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}\
+${font Droid Sans :size=8}${color1}${alignr 52}${voffset -73}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}
+${font Droid Sans :size=8}${color1}${alignr 52}${voffset 7}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} %${color}${font}
+${font Droid Sans :size=8}${color1}${alignr 52}${voffset 5}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${color}${font}\
+\
+# Background color indicates connectivity #
+\
+${if_existing /proc/net/route wlp2s0}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route wlp2s1}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route eth0}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route eth1}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route wlan0}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route wlan1}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route ppp0}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route ppp1}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route enp0s0}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${if_existing /proc/net/route enp0s1}
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-online.png -p 20,25 -s 228x110}\
+${else}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/fav-color-offline.png -p 20,25 -s 228x110}\
+${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}\
+\
+# Various images including the forecast icons #
+\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/bottom-bg.png -p 20,123 -s 228x121}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/separator-v.png -p 95,151 -s 1x83}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/separator-v.png -p 172,151 -s 1x83}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/pressure.png -p 224,35 -s 16x16}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/humidity.png -p 224,61 -s 16x16}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/Compact/wind-2.png -p 224,87 -s 16x16}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-white/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,177 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-white/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,177 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/small-white/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,177 -s 32x32}${font}${voffset -24}\
