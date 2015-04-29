@@ -46,19 +46,16 @@ top_name_width 7
 # Color scheme #
 default_color FFFFFF
 color1 FFFFFF
-color2 888888
+color2 777777
 color3 668694
 color4 FFFFFF
 color5 DCDCDC
-color6 FFFFFF
-color7 FFFFFF
-color8 FFFFFF
 
 TEXT
 # Various images #
 ${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/God-Mode/bg-2.png -p 14,26 -s 242x571}\
-${execi 300 cp -f ~/.harmattan-assets/photos/smallest/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 21,93 -s 228x86}\
+${execi 300 cp -f ~/.harmattan-assets/photos/smallest/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 21,92 -s 228x86}\
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/God-Mode/separator-v.png -p 95,185 -s 2x76}\
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/God-Mode/separator-v.png -p 172,185 -s 2x76}\
 \
@@ -89,9 +86,9 @@ ${voffset 4}${font Droid Sans :size=10}${alignc}${color2}${time %A, %B %d}${font
 \
 # Cpu, memory, uptime, and load graph #
 \
-${voffset 294}${goto 40}${color1}Cpu:${color}
-${voffset 4}${goto 40}${color1}Mem:${color}
-${voffset 4}${goto 40}${color1}Uptime:${color}
+${voffset 294}${goto 40}${color2}Cpu:${color}
+${voffset 4}${goto 40}${color2}Mem:${color}
+${voffset 4}${goto 40}${color2}Uptime:${color}
 ${voffset -47}${alignr 39}${color1}${cpu cpu0}%${color}
 ${voffset 4}${alignr 39}${color1}${memperc}%${color}
 ${voffset 4}${alignr 39}${color1}${uptime_short}${color}
@@ -116,9 +113,9 @@ ${voffset 4}${alignr 39}${color1}${top_mem mem_res 2}${color}
 ${voffset 4}${alignr 39}${color1}${top_mem mem_res 3}${color}
 ${voffset 4}${alignr 39}${color1}${top_mem mem_res 4}${color}
 ${voffset 4}${alignr 39}${color1}${top_mem mem_res 5}${color}
-${voffset -104}${goto 40}${color1}Proc${color}
-${voffset -13}${alignc}${color1}Mem%${color}
-${voffset -13}${alignr 39}${color1}Mem${color}
+${voffset -104}${goto 40}${color2}Proc${color}
+${voffset -13}${alignc}${color2}Mem%${color}
+${voffset -13}${alignr 39}${color2}Mem${color}
 \
 # The network section #
 \

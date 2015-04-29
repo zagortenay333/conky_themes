@@ -37,13 +37,12 @@ override_utf8_locale yes
 # Color scheme #
 default_color FFFFFF
 color1 FFFFFF
-color2 888888
+color2 777777
 
 TEXT
 # Various images #
 ${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}\
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/Comfortable/bg.png -p 10,15 -s 248x359}\
-${image ~/.harmattan-assets/misc/Ciliora-Secunda/Comfortable/bg-1.png -p 17,22 -s 234x237}\
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/Comfortable/separator-v.png -p 95,270 -s 2x84}\
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/Comfortable/separator-v.png -p 172,270 -s 2x84}\
 \
@@ -62,11 +61,11 @@ ${color1}${voffset -17}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cach
 # Weather conditions section #
 \
 ${color1}${font Droid Sans:size=48}${goto 32}${voffset -204}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}\
-${color1}${alignr 54}${voffset -162}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
-${color1}${alignr 54}${voffset 20}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} %
-${color1}${alignr 54}${voffset 20}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
-${color1}${alignr 54}${voffset 20}${execi 300 grep "yweather:astronomy" ~/.cache/weather.xml | grep -o "sunrise=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
-${color1}${alignr 54}${voffset 20}${execi 300 grep "yweather:astronomy" ~/.cache/weather.xml | grep -o "sunset=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color2}${alignr 54}${voffset -162}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color2}${alignr 54}${voffset 20}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} %
+${color2}${alignr 54}${voffset 20}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color2}${alignr 54}${voffset 20}${execi 300 grep "yweather:astronomy" ~/.cache/weather.xml | grep -o "sunrise=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${color2}${alignr 54}${voffset 20}${execi 300 grep "yweather:astronomy" ~/.cache/weather.xml | grep -o "sunset=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
 ${color1}${font Droid Sans :size=12}${goto 46}${voffset 26}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}\
 \
 # Various images including the forecast icons #

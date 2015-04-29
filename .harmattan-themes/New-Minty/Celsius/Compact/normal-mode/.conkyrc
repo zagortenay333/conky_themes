@@ -38,7 +38,7 @@ override_utf8_locale yes
 default_color FFFFFF
 color1 FFFFFF
 color2 FFFFFF
-color3 7DC83B
+color3 8ABF5C
 
 TEXT
 # Various images #
