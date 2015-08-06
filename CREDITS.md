@@ -8,15 +8,15 @@ The weather icons are part of the [Faenza](http://www.deviantart.com/art/Faenza-
 
 Some themes are inspired by other cool projects:
 
-| Theme | Inspired by |
-|-------|-------------|
-|Elementary     |[elementary OS](https://elementary.io/)
-|Numix          |[Numix Project](https://github.com/numixproject)
-|Elune          |[Elune theme](http://www.deviantart.com/art/Elune-199350232)
-|OMG-Ubuntu!    |[OMG-Ubuntu! website](http://www.omgubuntu.co.uk/)
-|Zukitwo        |[Zuki themes](https://github.com/lassekongo83/zuki-themes)
-|Ubuntu-touch   |[Vaguely by Ubuntu Touch](http://www.ubuntu.com/phone)
-|Nord           |[Nord shell theme](http://www.deviantart.com/art/GNOME-Shell-Nord-214295138)
+|    Theme    | Inspired by
+|-------------|-------------
+|Elementary   |[elementary OS](https://elementary.io/)
+|Numix        |[Numix Project](https://github.com/numixproject)
+|Elune        |[Elune theme](http://www.deviantart.com/art/Elune-199350232)
+|OMG-Ubuntu!  |[OMG-Ubuntu! website](http://www.omgubuntu.co.uk/)
+|Zukitwo      |[Zuki themes](https://github.com/lassekongo83/zuki-themes)
+|Ubuntu-touch |[Vaguely by Ubuntu Touch](http://www.ubuntu.com/phone)
+|Nord         |[Nord shell theme](http://www.deviantart.com/art/GNOME-Shell-Nord-214295138)
 
 ---
 
