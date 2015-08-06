@@ -17,6 +17,8 @@
 
 * Install curl & conky.
 
+* Make sure you have the Droid Sans font installed.
+
 * Move the `.harmattan-assets` folder into your `~` dir.
 
 * Each theme is made of a single `.conkyrc` file which sits at the end of a file path. To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
