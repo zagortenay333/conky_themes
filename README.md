@@ -1,3 +1,6 @@
+[![ License ](https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square)](LICENSE)
+[![ Latest gnome-shell version ](https://img.shields.io/badge/themes-22-a866ee.svg?style=flat-square)](#themes)
+
 ###Harmattan :sunny: :umbrella: :cloud: :snowflake:
 
 ---
