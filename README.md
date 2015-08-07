@@ -17,11 +17,12 @@
 
 * Install curl & conky.
 
-* Make sure you have the Droid Sans font installed.
+* Make sure you have the **Droid Sans** font installed.
 
 * Move the `.harmattan-assets` folder into your `~` dir.
 
-* Each theme is made of a single `.conkyrc` file which sits at the end of a file path. To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
+* Each theme is made of a single `.conkyrc` file which sits at the end of a file path inside the `.harmattan-themes` folder.  
+To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 
 * In order to display the weather of your city, replace the number `44418` inside your `.conkyrc` file with the **WOEID** of your city.
 
