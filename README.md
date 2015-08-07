@@ -15,7 +15,7 @@
 
 ####Installation:
 
-* Install curl & conky.
+* Install **curl** & **conky**.
 
 * Make sure you have the **Droid Sans** font installed.
 
@@ -65,8 +65,8 @@ To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 |:---:|------------|------------
 |**1**|Mini        |<ul><li>Current temperature</li><li>Forecast for next 2 days</li></ul>
 |**2**|Compact     |<ul><li>Detailed current conditions</li><li>Forecast for today & the next 2 days</li></ul>
-|**3**|Comfortable |_Same as Compact mode plus:_ <ul><li>Sunrise/sunset info</li><li>Current weather icon</li><li>More padding</li></ul>
-|**4**|God-Mode    |_Has a lot of additional sections:_<ul><li>Clock</li><li>Compact mode</li><li>Network info</li><li>Cpu + mem + uptime + total load</li><li>Processes</li></ul>
+|**3**|Comfortable |**Same as Compact mode plus:** <ul><li>Sunrise/sunset info</li><li>Current weather icon</li><li>More padding</li></ul>
+|**4**|God-Mode    |**Has a lot of additional sections:**<ul><li>Clock</li><li>**Compact** mode</li><li>Network info</li><li>Cpu + mem + uptime + total load</li><li>Processes</li></ul>
 
 ---
 
