@@ -1,6 +1,3 @@
-[![ License ](https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square)](LICENSE)
-[![ Latest gnome-shell version ](https://img.shields.io/badge/themes-22-a866ee.svg?style=flat-square)](#themes)
-
 ###Harmattan :sunny: :umbrella: :cloud: :snowflake:
 
 ---
@@ -10,6 +7,7 @@
 * [Form Factors](#form-factors)
 * [Modes](#modes)
 * [Credits](CREDITS.md)
+* [Preview](#preview)
 
 ---
 
@@ -21,7 +19,7 @@
 
 * Move the `.harmattan-assets` folder into your `~` dir.
 
-* Each theme is made of a single `.conkyrc` file which sits at the end of a file path inside the `.harmattan-themes` folder.  
+* Each theme is made of a single `.conkyrc` file which sits at the end of a file path inside the `.harmattan-themes` folder.
 To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 
 * In order to display the weather of your city, replace the number `44418` inside your `.conkyrc` file with the **WOEID** of your city.
@@ -78,3 +76,8 @@ To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 |**2**|Photo       |Photo used to display current weather
 
 **\*NOTE:** The **Mini** form factor doesn't have the **Photo** mode.
+
+---
+
+<img src="http://orig01.deviantart.net/701a/f/2015/241/1/2/conky_harmattan_by_zagortenay333-d720use.png" id="preview">
+
