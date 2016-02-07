@@ -1,4 +1,6 @@
-###Harmattan :sunny: :umbrella: :cloud: :snowflake:
+###Harmattan :sunny: :umbrella: :cloud: :snowflake: :snowman:
+
+A theme for [conky](https://github.com/brndnmtthws/conky).
 
 ---
 
@@ -24,7 +26,7 @@ To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 
 * In order to display the weather of your city, replace the number `44418` inside your `.conkyrc` file with the **WOEID** of your city.
 
-**\*NOTE:** Some files/folders are hidden; unhide them. :smile:
+**NOTE:** Some files/folders are hidden; unhide them. :smile:
 
 ---
 
@@ -64,7 +66,7 @@ To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 |**1**|Mini        |<ul><li>Current temperature</li><li>Forecast for next 2 days</li></ul>
 |**2**|Compact     |<ul><li>Detailed current conditions</li><li>Forecast for today & the next 2 days</li></ul>
 |**3**|Comfortable |**Same as Compact mode plus:** <ul><li>Sunrise/sunset info</li><li>Current weather icon</li><li>More padding</li></ul>
-|**4**|God-Mode    |**Has a lot of additional sections:**<ul><li>Clock</li><li>**Compact** mode</li><li>Network info</li><li>Cpu + mem + uptime + total load</li><li>Processes</li></ul>
+|**4**|God-Mode    |<ul><li>Clock</li><li>**Compact** mode</li><li>Network info</li><li>Cpu + mem + uptime + total load</li><li>Processes</li></ul>
 
 ---
 
@@ -75,9 +77,8 @@ To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 |**1**|Normal      |Icon used to display current weather
 |**2**|Photo       |Photo used to display current weather
 
-**\*NOTE:** The **Mini** form factor doesn't have the **Photo** mode.
+**NOTE:** The **Mini** form factor doesn't have the **Photo** mode.
 
 ---
 
 <img src="http://orig01.deviantart.net/701a/f/2015/241/1/2/conky_harmattan_by_zagortenay333-d720use.png" id="preview">
-
