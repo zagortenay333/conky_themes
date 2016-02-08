@@ -81,4 +81,4 @@ To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 
 ---
 
-<img src="http://orig01.deviantart.net/701a/f/2015/241/1/2/conky_harmattan_by_zagortenay333-d720use.png" id="preview">
+<img src="http://orig11.deviantart.net/7ef5/f/2016/039/f/a/conky_harmattan_by_zagortenay333-d720use.png" id="preview">
