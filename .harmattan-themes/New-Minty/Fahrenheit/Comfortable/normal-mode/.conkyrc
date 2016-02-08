@@ -42,7 +42,7 @@ color3 8ABF5C
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}\
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/New-Minty/Comfortable/fav-color.png -p 20,25 -s 228x230}\
 ${image ~/.harmattan-assets/misc/New-Minty/Comfortable/bottom-bg.png -p 20,255 -s 228x110}\
 ${image ~/.harmattan-assets/misc/New-Minty/Comfortable/separator-v.png -p 95,270 -s 1x83}\

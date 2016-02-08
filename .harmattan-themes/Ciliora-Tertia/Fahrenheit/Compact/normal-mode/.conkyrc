@@ -41,7 +41,7 @@ color2 948787
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}\
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/bg.png -p 10,15 -s 248x240}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/bg-1.png -p 18,24 -s 232x114}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/bg-2.png -p 18,138 -s 232x114}\

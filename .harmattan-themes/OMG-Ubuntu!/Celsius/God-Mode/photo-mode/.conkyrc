@@ -56,7 +56,7 @@ color8 F15D22
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/top-bg.png -p 20,25 -s 228x66}\
 ${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/shadow.png -p 20,591 -s 228x3}\
 ${execi 300 cp -f ~/.harmattan-assets/photos/smallest/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 20,91 -s 228x86}\

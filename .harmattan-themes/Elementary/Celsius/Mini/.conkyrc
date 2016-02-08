@@ -45,7 +45,7 @@ color3 0088cc
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Elementary/Mini/bg.png -p 14,22 -s 240x117}\
 \
 # The name of the days #

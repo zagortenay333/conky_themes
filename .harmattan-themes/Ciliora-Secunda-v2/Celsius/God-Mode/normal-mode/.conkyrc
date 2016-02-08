@@ -56,7 +56,7 @@ color8 FFFFFF
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda-v2/God-Mode/bg.png -p 20,30 -s 228x562}\
 \
 # The days of the forecast #

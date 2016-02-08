@@ -44,7 +44,7 @@ color5 FFFFFF
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}\
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Elune/Comfortable/fav-color.png -p 18,25 -s 232x229}\
 ${image ~/.harmattan-assets/misc/Elune/Comfortable/bottom-bg.png -p 18,254 -s 232x110}\
 ${image ~/.harmattan-assets/misc/Elune/Comfortable/separator-v.png -p 95,270 -s 1x83}\

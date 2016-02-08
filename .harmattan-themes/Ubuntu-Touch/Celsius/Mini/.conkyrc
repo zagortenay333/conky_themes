@@ -44,7 +44,7 @@ color2 FFFFFF
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Ubuntu-Touch/Mini/bg.png -p 20,28 -s 228x105}\
 ${image ~/.harmattan-assets/misc/Ubuntu-Touch/Mini/separator-v.png -p 95,30 -s 2x103}\
 ${image ~/.harmattan-assets/misc/Ubuntu-Touch/Mini/separator-v.png -p 172,30 -s 2x103}\

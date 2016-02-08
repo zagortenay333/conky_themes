@@ -47,7 +47,7 @@ color8 4FC0E9
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}\
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Flatts/Compact/fav-color.png -p 20,25 -s 228x110}\
 ${image ~/.harmattan-assets/misc/Flatts/Compact/border.png -p 20,25 -s 228x110}\
 ${image ~/.harmattan-assets/misc/Flatts/Compact/shadow.png -p 20,137 -s 228x110}\

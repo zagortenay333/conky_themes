@@ -56,7 +56,7 @@ color8 C83B3B
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/top-bg.png -p 20,30 -s 228x61}\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/fav-color.png -p 20,91 -s 228x86}\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/bg-1.png -p 20,177 -s 228x86}\

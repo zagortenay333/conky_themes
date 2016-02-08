@@ -44,7 +44,7 @@ color5 FFFFFF
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}\
+#no weather provider for now
 ${execi 300 cp -f ~/.harmattan-assets/photos/big-0px/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 20,25 -s 228x229}\
 ${image ~/.harmattan-assets/misc/Elune/Comfortable/border.png -p 14,19 -s 240x235}\
 ${image ~/.harmattan-assets/misc/Elune/Comfortable/bottom-bg-2.png -p 14,254 -s 240x110}\

@@ -56,7 +56,7 @@ color8 CC0000
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${execi 300 cp -f ~/.harmattan-assets/photos/smallest/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 20,91 -s 228x86}\
 ${image ~/.harmattan-assets/misc/Elementary/God-Mode/bg-2.png -p 19,30 -s 230x562}\
 ${image ~/.harmattan-assets/misc/Elementary/God-Mode/shadow-2.png -p 13,25 -s 242x574}\

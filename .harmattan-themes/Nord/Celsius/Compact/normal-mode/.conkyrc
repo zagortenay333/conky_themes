@@ -44,7 +44,7 @@ color5 FFFFFF
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}\
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Nord/Compact/fav-color.png -p 14,25 -s 236x110}\
 ${image ~/.harmattan-assets/misc/Nord/Compact/bottom-bg.png -p 14,135 -s 236x110}\
 ${image ~/.harmattan-assets/misc/Nord/Compact/separator-v.png -p 95,151 -s 1x83}\

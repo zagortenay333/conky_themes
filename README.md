@@ -1,3 +1,8 @@
+#Attention
+This conky won't work until I find a suitable weather provider. See [#12](/../../issues/12).
+
+---
+
 ###Harmattan :sunny: :umbrella: :cloud: :snowflake: :snowman:
 
 A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x`.

@@ -53,7 +53,7 @@ color5 DCDCDC
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/God-Mode/bg.png -p 14,26 -s 242x571}\
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/God-Mode/separator-v.png -p 95,185 -s 2x76}\
 ${image ~/.harmattan-assets/misc/Ciliora-Secunda/God-Mode/separator-v.png -p 172,185 -s 2x76}\

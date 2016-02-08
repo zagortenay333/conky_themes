@@ -55,7 +55,7 @@ color7 DDDDDD
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Zukitwo/God-Mode/top-bg-a.png -p 19,30 -s 230x61}\
 ${image ~/.harmattan-assets/misc/Zukitwo/God-Mode/bottom-bg-a.png -p 19,473 -s 230x119}\
 ${execi 300 cp -f ~/.harmattan-assets/photos/smallest/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 20,91 -s 228x86}\

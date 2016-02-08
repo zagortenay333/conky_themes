@@ -45,7 +45,7 @@ color3 F42828
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Cards/Mini/fav-color.png -p 20,28 -s 228x105}\
 ${image ~/.harmattan-assets/misc/Cards/Mini/shadow.png -p 12,20 -s 244x121}\
 ${image ~/.harmattan-assets/misc/Cards/Mini/separator-v.png -p 95,39 -s 1x83}\

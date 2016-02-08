@@ -46,7 +46,7 @@ color7 DDDDDD
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=c" -o ~/.cache/weather.xml}\
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Zukitwo/Comfortable/fav-color.png -p 20,25 -s 228x229}\
 ${image ~/.harmattan-assets/misc/Zukitwo/Comfortable/bottom-bg.png -p 20,254 -s 228x110}\
 ${image ~/.harmattan-assets/misc/Zukitwo/Comfortable/separator-v.png -p 95,270 -s 1x83}\

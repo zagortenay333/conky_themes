@@ -56,7 +56,7 @@ color8 FFFFFF
 
 TEXT
 # Various images #
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=44418&u=f" -o ~/.cache/weather.xml}
+#no weather provider for now
 ${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/bg.png -p 10,20 -s 248x582}\
 ${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/bg-1.png -p 20,90/ -s 228x182}\
 ${image ~/.harmattan-assets/misc/Brown-Card/God-Mode/bg-2.png -p 20,372/ -s 228x214}\
