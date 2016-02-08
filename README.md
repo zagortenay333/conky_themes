@@ -1,6 +1,6 @@
 ###Harmattan :sunny: :umbrella: :cloud: :snowflake: :snowman:
 
-A theme for [conky](https://github.com/brndnmtthws/conky).
+A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x`.
 
 ---
 
