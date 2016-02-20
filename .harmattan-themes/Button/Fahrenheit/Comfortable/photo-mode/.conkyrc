@@ -81,6 +81,6 @@ ${image ~/.harmattan-assets/misc/Button/Comfortable/humidity.png -p 224,74 -s 16
 ${image ~/.harmattan-assets/misc/Button/Comfortable/wind-2.png -p 224,111 -s 16x16}\
 ${image ~/.harmattan-assets/misc/Button/Comfortable/sunrise.png -p 224,148 -s 16x16}\
 ${image ~/.harmattan-assets/misc/Button/Comfortable/sunset.png -p 224,185 -s 16x16}\
-${execi 300 cp -f ~/.harmattan-assets/icons/small-#f9f9f9/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,292 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/small-#f9f9f9/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,292 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/small-#f9f9f9/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,292 -s 32x32}${font}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#f9f9f9__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,292 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#f9f9f9__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,292 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#f9f9f9__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,292 -s 32x32}${font}\
