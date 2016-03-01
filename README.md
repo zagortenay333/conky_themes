@@ -1,8 +1,3 @@
-#Attention
-This conky won't work until I find a suitable weather provider. See [#12](/../../issues/12).
-
----
-
 ###Harmattan :sunny: :umbrella: :cloud: :snowflake: :snowman:
 
 A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x`.
@@ -10,6 +5,10 @@ A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x`.
 ---
 
 * [Installation](#installation)
+* [API-key](#api-key)
+* [City](#city)
+* [Language](#language)
+* [Units](#units)
 * [Themes](#themes)
 * [Form Factors](#form-factors)
 * [Modes](#modes)
@@ -20,7 +19,7 @@ A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x`.
 
 ####Installation:
 
-* Install **curl** & **conky**.
+* Install **conky**, **curl** and **jq**.
 
 * Make sure you have the **Droid Sans** font installed.
 
@@ -29,9 +28,39 @@ A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x`.
 * Each theme is made of a single `.conkyrc` file which sits at the end of a file path inside the `.harmattan-themes` folder.
 To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 
-* In order to display the weather of your city, replace the number `44418` inside your `.conkyrc` file with the **WOEID** of your city.
-
 **NOTE:** Some files/folders are hidden; unhide them. :smile:
+
+---
+
+###API Key
+
+Register a private API key on [OpenWeatherMap](http://openweathermap.org/) to get weather data.
+
+Place the API key in the `template6` variable inside the `.conkyrc`file.
+
+---
+
+###City
+
+[Find the ID of your city](http://openweathermap.org/help/city_list.txt) and place it inside the `template7` variable inside the `.conkyrc` file.
+
+---
+
+###Language
+
+By default this conky will use your default locale.
+
+Edit the `template9` variable in the `.conkyrc` file to change the language.
+
+[See the list of supported languages](http://openweathermap.org/current#multi)
+
+**NOTE:** This will not translate all text in the `God-mode`.
+
+---
+
+###Units
+
+Edit the `template8` variable inside the `.conkyrc` file to change the units.
 
 ---
 

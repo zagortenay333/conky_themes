@@ -1,11 +1,24 @@
-# Conky settings #
+#====================================
+#   Conky Settings
+#====================================
 background yes
 update_interval 1
 double_buffer yes
 no_buffers yes
 imlib_cache_size 10
 
-# Window specifications #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_graph_size 26 80
+show_graph_scale no
+show_graph_range no
+
+
+#====================================
+#   Window Specifications
+#====================================
 gap_x 100
 gap_y 70
 minimum_size 268 620
@@ -20,30 +33,25 @@ border_outer_margin 0
 #own_window_argb_visual yes
 #own_window_argb_value 0
 
-# Graphics settings #
-draw_shades no
-default_shade_color AAAAAA
-draw_outline no
-default_outline_color AAAAAA
-draw_borders no
-draw_graph_borders no
-default_graph_size 26 80
-show_graph_scale no
-show_graph_range no
 
-# Text settings #
+#====================================
+#   Text Settings
+#====================================
 use_xft yes
 xftalpha 0
 xftfont Droid Sans:size=8
 text_buffer_size 256
 override_utf8_locale yes
 
-# Useful shortenings #
+short_units yes
 short_units yes
 pad_percents 2
 top_name_width 7
 
-# Color scheme #
+
+#====================================
+#   Color Scheme
+#====================================
 default_color FFFFFF
 color1 FFFFFF
 color2 FFFFFF
@@ -54,9 +62,52 @@ color6 AAAAAA
 color7 FFFFFF
 color8 C83B3B
 
+
+#====================================
+#   API Key
+#====================================
+template6 ""
+
+
+#====================================
+#   City ID
+#====================================
+template7 ""
+
+
+#====================================
+#   Temp Unit (default, metric, imperial)
+#====================================
+template8 metric
+
+
+#====================================
+#   Locale (e.g. "es_ES.UTF-8")
+#   Leave empty for default
+#   Leave the quotes
+#====================================
+template9 ""
+
+
+###################################################
+###################################################
+
+
 TEXT
-# Various images #
-#no weather provider for now
+#----------------------------------------
+#   CURL
+#----------------------------------------
+\
+\
+${execi 300 l=${template9}; l=${l%%_*}; curl -s "api.openweathermap.org/data/2.5/forecast/daily?APPID=${template6}&id=${template7}&cnt=5&units=${template8}&lang=$l" -o ~/.cache/forecast.json}\
+${execi 300 l=${template9}; l=${l%%_*}; curl -s "api.openweathermap.org/data/2.5/weather?APPID=${template6}&id=${template7}&cnt=5&units=${template8}&lang=$l" -o ~/.cache/weather.json}\
+\
+\
+#----------------------------------------
+#   Misc Images
+#----------------------------------------
+\
+\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/top-bg.png -p 20,30 -s 228x61}\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/fav-color.png -p 20,91 -s 228x86}\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/bg-1.png -p 20,177 -s 228x86}\
@@ -70,32 +121,52 @@ ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/separator-v.png -p 172,185 -
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/separator-h.png -p 21,369 -s 226x1}\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/separator-h.png -p 21,269 -s 226x1}\
 \
-# The days of the forecast #
 \
-${color3}${voffset 172}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}${color}
-${color3}${voffset -13}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}${color}
-${color3}${voffset -13}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}${color}
+#----------------------------------------
+#   Day names
+#----------------------------------------
 \
-# The temperatures of the forecast #
 \
-${color2}${voffset 51}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°${color}
-${color2}${voffset -13}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°${color}
-${color2}${voffset -13}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°${color}
+${color3}${voffset 172}${alignc 77}${execi 300 LANG=${template9} LC_TIME=${template9} date +%^a}${color}
+${color3}${voffset -13}${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +1day +%^a}${color}
+${color3}${voffset -13}${alignc -77}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +2day +%^a}${color}
 \
-# The "conditions" section of the conky #
 \
-${goto 36}${voffset -172}${font Droid Sans :size=36}${color1}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}${color}
-${goto 46}${voffset 14}${font Droid Sans :size=12}${color1}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}${color}
-${color1}${alignr 52}${voffset -73}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
-${color1}${alignr 52}${voffset 7}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} %${color}
-${color1}${alignr 52}${voffset 7}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${color}
+#----------------------------------------
+#   Temperatures
+#----------------------------------------
 \
-# Clock + calendar #
+\
+${color2}${voffset 51}${alignc 77}${execi 300 jq -r .list[0].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[0].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°${color}
+${color2}${voffset -13}${alignc}${execi 300 jq -r .list[1].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[1].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°${color}
+${color2}${voffset -13}${alignc -77}${execi 300 jq -r .list[2].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[2].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°${color}
+\
+\
+#----------------------------------------
+#   Conditions
+#----------------------------------------
+\
+\
+${goto 36}${voffset -172}${font Droid Sans :size=36}${color1}${execi 300 jq -r .main.temp ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num}°${font}${color}
+${goto 46}${voffset 14}${font Droid Sans :size=12}${color1}${execi 300 jq -r .weather[0].description ~/.cache/weather.json | sed 's|\<.|\U&|g'}${font}${color}
+${color1}${alignr 52}${voffset -73}${execi 300 jq -r .main.pressure ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa
+${color1}${alignr 52}${voffset 7}${execi 300 jq -r .main.humidity ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}
+${color1}${alignr 52}${voffset 7}${execi 300 jq -r .wind.speed ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} m/s${else}${if_match "$template8" == "default"} m/s${else}${if_match "$template8" == "imperial"} mi/h${endif}${endif}${endif}${color}
+\
+\
+#----------------------------------------
+#   Clock and Date
+#----------------------------------------
+\
 \
 ${voffset -117}${font Droid Sans Mono :size=22}${alignc}${color2}${time %H:%M}${font}${color}
-${voffset 4}${font Droid Sans :size=10}${alignc}${color6}${time %A, %B %d}${font}${color}
+${voffset 4}${font Droid Sans :size=10}${alignc}${color6}${execi 300 LANG=${template9} LC_TIME=${template9} date +"%A, %B %-d"}${font}${color}
 \
-# Cpu, memory, uptime, and load graph #
+\
+#----------------------------------------
+#   Cpu, memory, uptime, and load graph
+#----------------------------------------
+\
 \
 ${voffset 294}${goto 40}${color5}Cpu:${color}
 ${voffset 4}${goto 40}${color5}Mem:${color}
@@ -107,7 +178,11 @@ ${voffset -47}${alignc}${color2}${cpubar 5,36}${color}
 ${voffset 4}${alignc}${color2}${membar 5,36}${color}
 ${voffset 29}${goto 40}${loadgraph 26,190 FFFFFF FFFFFF -l}
 \
-# The processes section #
+\
+#----------------------------------------
+#   Processes
+#----------------------------------------
+\
 \
 ${voffset 26}${goto 40}${color5}${top_mem name 1}${color}
 ${voffset 4}${goto 40}${color5}${top_mem name 2}${color}
@@ -128,7 +203,11 @@ ${voffset -104}${goto 40}${color1}Proc${color}
 ${voffset -13}${alignc}${color1}Mem%${color}
 ${voffset -13}${alignr 39}${color1}Mem${color}
 \
-# The network section #
+\
+#----------------------------------------
+#   Network
+#----------------------------------------
+\
 \
 ${if_existing /proc/net/route ppp0}
 ${voffset -227}${goto 40}${color5}Up: ${color2}${upspeed ppp0}${color5}${goto 150}Down: ${color2}${downspeed ppp0}
@@ -184,11 +263,15 @@ ${voffset -311}${goto 40}${color8}Network disconnected${color}
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/offline.png -p 44,284 -s 16x16}
 ${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}
 \
-# Various images including the icons of the forecast #
+\
+#----------------------------------------
+#   Weather icons
+#----------------------------------------
+\
 \
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/pressure.png -p 224,95 -s 16x16}\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/humidity.png -p 224,115 -s 16x16}\
 ${image ~/.harmattan-assets/misc/New-Minty/God-Mode/wind.png -p 224,136 -s 16x16}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 41,207 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 119,207 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 195,207 -s 32x32}${font}${voffset -120}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[0].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 41,207 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[1].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 119,207 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[2].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 195,207 -s 32x32}${font}${voffset -120}\

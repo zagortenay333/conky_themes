@@ -1,11 +1,24 @@
-# Conky settings #
+#====================================
+#   Conky Settings
+#====================================
 background yes
 update_interval 1
 double_buffer yes
 no_buffers yes
 imlib_cache_size 10
 
-# Window specifications #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_graph_size 26 80
+show_graph_scale no
+show_graph_range no
+
+
+#====================================
+#   Window Specifications
+#====================================
 gap_x 100
 gap_y 70
 minimum_size 268 270
@@ -20,62 +33,120 @@ border_outer_margin 0
 #own_window_argb_visual yes
 #own_window_argb_value 0
 
-# Graphics settings #
-draw_shades no
-default_shade_color AAAAAA
-draw_outline no
-default_outline_color AAAAAA
-draw_borders no
 
-# Text settings #
+#====================================
+#   Text Settings
+#====================================
 use_xft yes
 xftalpha 0
 xftfont Droid Sans:size=10
 text_buffer_size 256
 override_utf8_locale yes
 
-# Color scheme #
+
+#====================================
+#   Color Scheme
+#====================================
 default_color 666666
 color1 666666
 color2 948787
 color3 FFFFFF
 
+
+#====================================
+#   API Key
+#====================================
+template6 ""
+
+
+#====================================
+#   City ID
+#====================================
+template7 ""
+
+
+#====================================
+#   Temp Unit (default, metric, imperial)
+#====================================
+template8 metric
+
+
+#====================================
+#   Locale (e.g. "es_ES.UTF-8")
+#   Leave empty for default
+#   Leave the quotes
+#====================================
+template9 ""
+
+
+###################################################
+###################################################
+
+
 TEXT
-# Various images #
-#no weather provider for now
+#----------------------------------------
+#   CURL
+#----------------------------------------
+\
+\
+${execi 300 l=${template9}; l=${l%%_*}; curl -s "api.openweathermap.org/data/2.5/forecast/daily?APPID=${template6}&id=${template7}&cnt=5&units=${template8}&lang=$l" -o ~/.cache/forecast.json}\
+${execi 300 l=${template9}; l=${l%%_*}; curl -s "api.openweathermap.org/data/2.5/weather?APPID=${template6}&id=${template7}&cnt=5&units=${template8}&lang=$l" -o ~/.cache/weather.json}\
+\
+\
+#----------------------------------------
+#   Misc Images
+#----------------------------------------
+\
+\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/bg.png -p 10,15 -s 248x240}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/image-shadow.png -p 18,24 -s 232x114}\
-${execi 300 cp -f ~/.harmattan-assets/photos/small-0px/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 20,26 -s 228x110}\
+${execi 300 cp -f ~/.harmattan-assets/photos/small-0px/$(jq .weather[0].id ~/.cache/weather.json).png ~/.cache/weather.png}${image ~/.cache/weather.png -p 20,26 -s 228x110}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/image-border.png -p 18,24 -s 232x114}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/bg-2.png -p 18,138 -s 232x114}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/separator-v.png -p 95,151 -s 2x84}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/separator-v.png -p 171,151 -s 2x84}\
 \
-# The name of the days #
 \
-${color1}${voffset 149}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}
-${color1}${voffset -17}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}
-${color1}${voffset -17}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}
+#----------------------------------------
+#   Day names
+#----------------------------------------
 \
-# Temperatures #
 \
-${color1}${voffset 53}${alignc 77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
-${color1}${voffset -17}${alignc}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°
-${color1}${voffset -17}${alignc -77}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°/${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°
+${color1}${voffset 149}${alignc 77}${execi 300 LANG=${template9} LC_TIME=${template9} date +%^a}
+${color1}${voffset -17}${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +1day +%^a}
+${color1}${voffset -17}${alignc -77}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +2day +%^a}
 \
-# Conditions #
 \
-${color3}${font Droid Sans :size=36}${goto 36}${voffset -196}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}\
-${color3}${font Droid Sans :size=12}${goto 46}${voffset 33}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}\
-${font Droid Sans :size=8}${color3}${alignr 52}${voffset -73}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "pressure=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}
-${font Droid Sans :size=8}${color3}${alignr 52}${voffset 7}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} %${color}${font}
-${font Droid Sans :size=8}${color3}${alignr 52}${voffset 5}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${color}${font}\
+#----------------------------------------
+#   Temperatures
+#----------------------------------------
 \
-# Various images including the forecast icons #
+\
+${color1}${voffset 53}${alignc 77}${execi 300 jq -r .list[0].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[0].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
+${color1}${voffset -17}${alignc}${execi 300 jq -r .list[1].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[1].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
+${color1}${voffset -17}${alignc -77}${execi 300 jq -r .list[2].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[2].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
+\
+\
+#----------------------------------------
+#   Conditions
+#----------------------------------------
+\
+\
+${color3}${font Droid Sans :size=36}${goto 36}${voffset -196}${execi 300 jq -r .main.temp ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num}°${font}\
+${color3}${font Droid Sans :size=12}${goto 46}${voffset 33}${execi 300 jq -r .weather[0].description ~/.cache/weather.json | sed 's|\<.|\U&|g'}${font}\
+${font Droid Sans :size=8}${color3}${alignr 52}${voffset -73}${execi 300 jq -r .main.pressure ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
+${font Droid Sans :size=8}${color3}${alignr 52}${voffset 7}${execi 300 jq -r .main.humidity ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
+${font Droid Sans :size=8}${color3}${alignr 52}${voffset 5}${execi 300 jq -r .wind.speed ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} m/s${else}${if_match "$template8" == "default"} m/s${else}${if_match "$template8" == "imperial"} mi/h${endif}${endif}${endif}${color}${font}\
+\
+\
+#----------------------------------------
+#   Weather icons
+#----------------------------------------
+\
 \
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/pressure-2.png -p 224,35 -s 16x16}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/humidity-2.png -p 224,61 -s 16x16}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia/Compact/wind.png -p 224,87 -s 16x16}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#666__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,177 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#666__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,177 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#666__32/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,177 -s 32x32}${font}${voffset -24}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#666__32/$(jq .list[0].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,177 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#666__32/$(jq .list[1].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,177 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#666__32/$(jq .list[2].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,177 -s 32x32}${font}${voffset -24}\
