@@ -1,6 +1,6 @@
 ###Harmattan :sunny: :umbrella: :cloud: :snowflake: :snowman:
 
-A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x`.
+A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x` powered by [OpenWeatherMap](http://openweathermap.org/).
 
 ---
 
@@ -54,7 +54,7 @@ Edit the `template9` variable in the `.conkyrc` file to change the language.
 
 [See the list of supported languages](http://openweathermap.org/current#multi)
 
-**NOTE:** This will not translate all text in the `God-mode`.
+**NOTE:** `God-mode` has some hardcoded text that won't get translated, but you can edit it manually.
 
 ---
 
