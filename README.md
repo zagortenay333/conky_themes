@@ -1,9 +1,10 @@
 ###Harmattan :sunny: :umbrella: :cloud: :snowflake: :snowman:
 
-A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x` powered by [OpenWeatherMap](http://openweathermap.org/).
+A theme for [conky](https://github.com/brndnmtthws/conky) powered by [OpenWeatherMap](http://openweathermap.org/).
 
 ---
 
+* [Compatibility](#compatibility)
 * [Installation](#installation)
 * [API-key](#api-key)
 * [City](#city)
@@ -14,6 +15,14 @@ A theme for [conky](https://github.com/brndnmtthws/conky) version `1.9.x` powere
 * [Modes](#modes)
 * [Credits](CREDITS.md)
 * [Preview](#preview)
+
+---
+
+####Compatibility:
+
+The latest version of this theme is on the master branch, and it supports conky `1.10.x`.
+
+For older versions, check the available [releases](../../releases).
 
 ---
 
