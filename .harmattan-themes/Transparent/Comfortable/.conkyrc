@@ -133,5 +133,4 @@ ${execi 300 cp -f ~/.harmattan-assets/icons/#fff__64/$(jq .weather[0].id ~/.cach
 ${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[0].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 27,306 -s 32x32}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[1].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,306 -s 32x32}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[2].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 207,306 -s 32x32}${font}\
-
 ]]

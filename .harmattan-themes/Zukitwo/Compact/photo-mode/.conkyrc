@@ -138,5 +138,4 @@ ${image ~/.harmattan-assets/misc/Zukitwo/Compact/wind-2.png -p 224,87 -s 16x16}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#2c2c2c__32/$(jq .list[0].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,177 -s 32x32}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#2c2c2c__32/$(jq .list[1].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,177 -s 32x32}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#2c2c2c__32/$(jq .list[2].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,177 -s 32x32}${font}${voffset -24}\
-
 ]]
