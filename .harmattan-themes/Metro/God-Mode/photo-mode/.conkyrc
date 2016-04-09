@@ -41,7 +41,7 @@ border_outer_margin=0,
 --  Text Settings
 -------------------------------------
 use_xft=true,
-xftalpha=0,
+xftalpha=1,
 font="Droid Sans:size=8",
 text_buffer_size=256,
 override_utf8_locale=true,

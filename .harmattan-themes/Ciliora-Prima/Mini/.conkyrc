@@ -42,7 +42,7 @@ draw_graph_borders=false,
 --  Text Settings
 -------------------------------------
 use_xft=true,
-xftalpha=0,
+xftalpha=1,
 font="Droid Sans:size=10",
 text_buffer_size=256,
 override_utf8_locale=true,
