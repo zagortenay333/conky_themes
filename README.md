@@ -124,4 +124,4 @@ Edit the `template8` variable inside the `.conkyrc` file to change the units.
 
 ---
 
-<img src="http://orig11.deviantart.net/7ef5/f/2016/039/f/a/conky_harmattan_by_zagortenay333-d720use.png" id="preview">
+<img src="https://i.imgur.com/gVt0UOr.jpg" id="preview">
