@@ -37,7 +37,8 @@ For older versions, check the available [releases](../../releases).
 * Each theme is made of a single `.conkyrc` file which sits at the end of a file path inside the `.harmattan-themes` folder.
 To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 
-**NOTE:** Some files/folders are hidden; unhide them. :smile:
+> **NOTE:**  
+> Some files/folders are hidden; unhide them. :smile:
 
 ---
 
@@ -63,7 +64,8 @@ Edit the `template9` variable in the `.conkyrc` file to change the language.
 
 [See the list of supported languages](http://openweathermap.org/current#multi)
 
-**NOTE:** `God-mode` has some hardcoded text that won't get translated, but you can edit it manually.
+> **NOTE:**  
+> `God-mode` has some hardcoded text that won't get translated, but you can edit it manually.
 
 ---
 
@@ -120,7 +122,8 @@ Edit the `template8` variable inside the `.conkyrc` file to change the units.
 |**1**|Normal      |Icon used to display current weather
 |**2**|Photo       |Photo used to display current weather
 
-**NOTE:** The **Mini** form factor doesn't have the **Photo** mode.
+> **NOTE:**  
+> The **Mini** form factor doesn't have the **Photo** mode.
 
 ---
 
