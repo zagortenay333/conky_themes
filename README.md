@@ -13,7 +13,7 @@ A theme for [conky](https://github.com/brndnmtthws/conky) powered by [OpenWeathe
 * [Themes](#themes)
 * [Form Factors](#form-factors)
 * [Modes](#modes)
-* [Credits](CREDITS.md)
+* [Network Section](#network-section)
 * [Preview](#preview)
 
 ---
@@ -124,6 +124,15 @@ Edit the `template8` variable inside the `.conkyrc` file to change the units.
 
 > **NOTE:**  
 > The **`Mini`** form factor doesn't have the **`Photo-mode`**.
+
+---
+
+### Network Section:
+
+In case the network section doesn't display in **`God-mode`**, you need to find the name of your network interface and plug it in manually at: https://github.com/zagortenay333/Harmattan/blob/4ef1a09e960d8e5d3da34a2550bfe5ef03523549/.harmattan-themes/Flatts/God-Mode/normal-mode/.conkyrc#L189-L192.
+
+> **NOTE:**  
+> Replace the `ppp0` string.
 
 ---
 
