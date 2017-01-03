@@ -14,6 +14,7 @@ A theme for [conky](https://github.com/brndnmtthws/conky) powered by [OpenWeathe
 * [Form Factors](#form-factors)
 * [Modes](#modes)
 * [Network Section](#network-section)
+* [Rendering Weather Icons](#rendering-weather-icons)
 * [Preview](#preview)
 
 ---
@@ -133,6 +134,15 @@ In case the network section doesn't display in **`God-mode`**, you need to find 
 
 > **NOTE:**  
 > Replace the `ppp0` string.
+
+---
+
+### Rendering Weather Icons:
+
+You can render a fresh set of weather icons in any color/size you want using the `render-pngs` script.
+
+> **NOTE:**  
+> The script needs the `SVG` dir to work.
 
 ---
 
