@@ -120,7 +120,7 @@ ${image ~/.harmattan-assets/misc/Nord/God-Mode/separator-h.png -p 33,269 -s 202x
 \
 \
 \
-${color1}${voffset 172}${alignc 77}${execi 300 LANG=${template9} LC_TIME=${template9} date +%^a}${color}
+${color1}${voffset 187}${alignc 77}${execi 300 LANG=${template9} LC_TIME=${template9} date +%^a}${color}
 ${color1}${voffset -13}${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +1day +%^a}${color}
 ${color1}${voffset -13}${alignc -77}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +2day +%^a}${color}
 \
