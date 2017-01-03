@@ -104,16 +104,16 @@ ${image ~/.harmattan-assets/misc/Texture/Compact/separator-v.png -p 171,151 -s 1
 \
 \
 \
-${color2}${voffset 149}${alignc 77}${execi 300 LANG=${template9} LC_TIME=${template9} date +%^a}
-${color2}${voffset -17}${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +1day +%^a}
-${color2}${voffset -17}${alignc -77}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +2day +%^a}
+${color2}${voffset 152}${alignc 77}${execi 300 LANG=${template9} LC_TIME=${template9} date +%^a}
+${color2}${voffset -15}${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +1day +%^a}
+${color2}${voffset -15}${alignc -77}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +2day +%^a}
 \
 \
 \
 \
 ${color2}${voffset 53}${alignc 77}${execi 300 jq -r .list[0].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[0].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
-${color2}${voffset -17}${alignc}${execi 300 jq -r .list[1].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[1].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
-${color2}${voffset -17}${alignc -77}${execi 300 jq -r .list[2].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[2].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
+${color2}${voffset -15}${alignc}${execi 300 jq -r .list[1].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[1].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
+${color2}${voffset -15}${alignc -77}${execi 300 jq -r .list[2].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°/${execi 300 jq -r .list[2].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}°
 \
 \
 \
