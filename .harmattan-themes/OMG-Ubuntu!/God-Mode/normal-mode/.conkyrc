@@ -241,9 +241,9 @@ ${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/bg-1.png -p 20,164 -s 228x
 ${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/separator-v.png -p 95,185 -s 1x76}\
 ${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/separator-v.png -p 172,185 -s 1x76}\
 ${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/frame.png -p 19,24 -s 230x569}\
-${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/pressure.png -p 224,95 -s 16x16}\
-${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/humidity.png -p 224,115 -s 16x16}\
-${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/wind-2.png -p 224,136 -s 16x16}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/pressure.png -p 224,97 -s 16x16}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/humidity.png -p 224,117 -s 16x16}\
+${image ~/.harmattan-assets/misc/OMG-Ubuntu!/God-Mode/wind-2.png -p 224,138 -s 16x16}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[0].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 41,207 -s 32x32}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[1].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 119,207 -s 32x32}\
 ${execi 300 cp -f ~/.harmattan-assets/icons/#fff__32/$(jq .list[2].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 195,207 -s 32x32}${font}${voffset -120}\
