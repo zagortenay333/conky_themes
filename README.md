@@ -141,8 +141,8 @@ In case the network section doesn't display in **`God-mode`**, you need to find 
 
 You can render a fresh set of weather icons in any color/size you want using the `render-pngs` script.
 
-> **NOTE:**  
-> The script needs the `SVG` dir to work.
+> * The script requires **inkscape**.  
+> * The script uses the `SVG` dir to render the pngs.
 
 ---
 
