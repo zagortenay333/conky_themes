@@ -36,7 +36,6 @@ For older versions, check the available [releases](../../releases).
 * Move the `.harmattan-assets` folder into your `~` dir.
 
 * Each theme is made of a single `.conkyrc` file which sits at the end of a file path inside the `.harmattan-themes` folder.
-To activate a certain theme, move it's `.conkyrc` file into your `~` dir.
 
 > **NOTE:**  
 > Some files/folders are hidden; unhide them. :smile:
