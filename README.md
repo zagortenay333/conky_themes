@@ -103,6 +103,9 @@ Edit the `template8` variable inside the `.conkyrc` file to change the units.
 | **21** | Ciliora-Tertia     | All
 | **22** | Ciliora-Tertia-v2  | No **`Photo-mode`** :heavy_exclamation_mark:
 
+> **NOTE:**  
+> The **`Mini`** form factor in all themes doesn't have the **`Photo-mode`**.
+
 ---
 
 ### Form factors:
@@ -122,9 +125,6 @@ Edit the `template8` variable inside the `.conkyrc` file to change the units.
 | :---: | ------------ | ------------
 | **1** | Normal       | Icon used to display current weather
 | **2** | Photo        | Photo used to display current weather
-
-> **NOTE:**  
-> The **`Mini`** form factor doesn't have the **`Photo-mode`**.
 
 ---
 
