@@ -113,7 +113,6 @@ ${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/fav-color-4.png -p 2
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/fav-color-5.png -p 20,368 -s 228x105}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/fav-color-6.png -p 20,473 -s 228x119}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/fav-color-7.png -p 20,476 -s 228x18}\
-${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/border.png -p 19,29 -s 230x564}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/separator-v.png -p 95,185 -s 1x76}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/separator-v.png -p 172,185 -s 1x76}\
 ${image ~/.harmattan-assets/misc/Ciliora-Tertia-v2/God-Mode/separator-h.png -p 33,369 -s 202x1}\
