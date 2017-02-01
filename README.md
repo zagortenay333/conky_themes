@@ -29,7 +29,7 @@ For older versions, check the available [releases](../../releases).
 
 ### Installation:
 
-* Install **conky**, **curl** and **jq**.
+* Install **conky-all**, **curl** and **jq**.
 
 * Make sure you have the **Droid Sans** font installed.
 
