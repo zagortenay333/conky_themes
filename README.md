@@ -30,6 +30,7 @@ For older versions, check the available [releases](../../releases).
 ### Installation:
 
 * Install **conky**, **curl** and **jq**.
+  * On Ubuntu 16.04+, you may need to install `conky-all` instead of the transitional package `conky`.
 
 * Make sure you have the **Droid Sans** font installed.
 
@@ -39,6 +40,9 @@ For older versions, check the available [releases](../../releases).
 
 > **NOTE:**  
 > Some files/folders are hidden; unhide them. :smile:
+
+> **NOTE 2:**
+> There is a `preview.sh` script which will copy the assets and then run through all the themes in turn, so you can pick one you like! :metal:
 
 ---
 
