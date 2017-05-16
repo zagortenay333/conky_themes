@@ -42,7 +42,7 @@ For older versions, check the available [releases](../../releases).
 > Some files/folders are hidden; unhide them. :smile:
 
 > **NOTE 2:**
-> There is a `preview.sh` script which will copy the assets and then run through all the themes in turn, so you can pick one you like! :metal:
+> There is a `preview.sh` script which will copy the assets and then allow you to interactively play around with the themes.
 
 ---
 
