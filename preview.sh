@@ -1,0 +1,185 @@
+#!/bin/bash
+
+# Set extglob flag for regexes
+shopt -s extglob
+
+# Signal setup to restore config if required
+trap ctrl_c INT
+
+#### VARIABLES ####
+# Build theme array
+declare -a themePaths
+for theme in $(find .harmattan-themes -mindepth 1 -maxdepth 1 -type d | sort)
+do
+  themePaths+=($theme)
+done
+
+dateString=$(date +%s)
+revertToggle=false
+sizes=( 'God-Mode' 'Comfortable' 'Compact' 'Mini' )
+modes=( 'normal-mode' 'photo-mode' )
+xindex=0
+yindex=0
+mindex=0
+xmax=${#themePaths[@]}
+ymax=${#sizes[@]}
+mmax=${#modes[@]}
+
+#### FUNCTIONS ####
+function ctrl_c() {
+  echo -e '\nquitting'
+  exit 0
+}
+
+function update() {
+  echo ''
+  newTheme="${themePaths[$xindex]}/${sizes[$yindex]}/${modes[$mindex]}/.conkyrc"
+
+  shortTheme=$(basename ${themePaths[$xindex]})
+  echo "switching to $shortTheme,${sizes[$yindex]},${modes[$mindex]}"
+  if [ ! -f $newTheme ]
+  then
+    newTheme="${themePaths[$xindex]}/${sizes[$yindex]}/.conkyrc"
+    if [ ! -f $newTheme ]
+    then
+      echo "couldn't find .conkyrc file for this combination"
+      return
+    fi
+  fi
+  cp $newTheme ~/.conkyrc
+}
+
+function install() {
+  while true
+  do
+    read -p "Enter your OpenWeatherMap API key:" apiKey
+    if [[ ! $apiKey =~ ^[a-zA-Z0-9]+$ ]]
+    then
+      echo 'API key must be only alphanumeric characters.'
+    else
+      break
+    fi
+  done
+
+  while true
+  do
+    read -p "Enter your OpenWeatherMap Location ID:" locationID
+    if [[ ! $locationID =~ ^[0-9]+$ ]]
+    then
+      echo 'Location ID must be a number.'
+    else
+      break
+    fi
+  done
+
+  while true
+  do
+    read -p "Would you like metric or imperial units? " unitType
+    if [[ ! "metric imperial" =~ "${unitType}" ]]
+    then
+      echo 'units must be "metric" or "imperial"'
+    else
+      break
+    fi
+  done
+  apiString="template6=\"$apiKey\","
+  locationString="template7=\"$locationID\","
+  unitString="template8=\"$unitType\","
+  sed -i "s/^template6=.*/$apiString/" ~/.conkyrc | grep template6
+  sed -i "s/^template7=.*/$locationString/" ~/.conkyrc | grep template7
+  sed -i "s/^template8=.*/$unitString/" ~/.conkyrc | grep template8
+  echo 'config updated'
+}
+
+function revert() {
+  echo ''
+  if $revertToggle
+  then
+    echo 'reverting config'
+    cp ~/.conkyrc-$dateString ~/.conkyrc
+  else
+    echo 'no config to revert to'
+  fi
+  return
+}
+
+function helpText() {
+  echo ''
+  echo "Press h/l to scroll through themes."
+  echo "Press j/k to scroll through formats."
+  echo "Press n/m to scroll through modes."
+  echo "Press i to install and add API key/location info."
+  echo "Press r to revert to your backed-up .conkyrc"
+  echo "Press q or ctrl-c to quit."
+}
+
+#### SETUP ####
+# Install the assets
+if [ ! -d ~/.harmattan-assets/ ]
+then
+  echo 'Installing assets'
+  cp -r .harmattan-assets ~/
+fi
+
+# Backup existing conky file
+if [ ! -f ~/.conkyrc ]
+then
+  echo 'No config file found, using first theme to start with.'
+  cp .harmattan-themes/Brown-Card/God-Mode/normal-mode/.conkyrc ~/
+else
+  echo "Conky file found, backing up to ~/.conkyrc-$dateString"
+  cp ~/.conkyrc ~/.conkyrc-$dateString
+  revertToggle=true
+fi
+
+# Check for process
+PID=$(ps -ef | grep [c]onky | awk {'print $2'})
+if [ -z $PID ]
+then
+  echo 'Conky not running, starting it'
+  conky -q
+fi
+
+#### MAIN ####
+helpText
+while true
+do
+  read -n1 -p ':> ' key
+  case $key in
+    h)
+      xindex=$(( ( xindex + 1) % xmax ))
+      ;;
+    l)
+      xindex=$(( ( xindex - 1) % xmax ))
+      ;;
+    j)
+      yindex=$(( ( yindex + 1) % ymax ))
+      ;;
+    k)
+      yindex=$(( ( yindex - 1) % ymax ))
+      ;;
+    m)
+      mindex=$(( ( mindex - 1) % mmax ))
+      ;;
+    n)
+      mindex=$(( ( mindex + 1) % mmax ))
+      ;;
+    i)
+      install
+      continue
+      ;;
+    r)
+      revert
+      continue
+      ;;
+    q)
+      ctrl_c
+      ;;
+    *)
+      helpText
+      continue
+      ;;
+  esac
+  update $xindex $yindex $mindex
+done
+
