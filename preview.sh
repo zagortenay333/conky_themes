@@ -14,6 +14,11 @@ do
   themePaths+=($theme)
 done
 
+declare -A unitMap=(
+    ['kelvin']='default'
+    ['celsius']='metric'
+    ['fahrenheit']='imperial'
+)
 dateString=$(date +%s)
 revertToggle=false
 sizes=( 'God-Mode' 'Comfortable' 'Compact' 'Mini' )
@@ -74,17 +79,18 @@ function install() {
 
   while true
   do
-    read -p "Would you like metric or imperial units? " unitType
-    if [[ ! "metric imperial" =~ "${unitType}" ]]
+      read -p "Choose unit type ('celsius', 'kelvin' or 'fahrenheit'): " unitType
+    if [[ ! "celsius kelvin fahrenheit" =~ "${unitType}" ]]
     then
-      echo 'units must be "metric" or "imperial"'
+      echo "Spelling error. Options are: 'celsius', 'kelvin' or 'fahrenheit'."
     else
       break
     fi
   done
+
   apiString="template6=\"$apiKey\","
   locationString="template7=\"$locationID\","
-  unitString="template8=\"$unitType\","
+  unitString="template8=\"${unitMap[$unitType]}\","
   sed -i "s/^template6=.*/$apiString/" ~/.conkyrc | grep template6
   sed -i "s/^template7=.*/$locationString/" ~/.conkyrc | grep template7
   sed -i "s/^template8=.*/$unitString/" ~/.conkyrc | grep template8
