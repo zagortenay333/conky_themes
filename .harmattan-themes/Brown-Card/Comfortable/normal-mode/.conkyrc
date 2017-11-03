@@ -89,8 +89,8 @@ template9=""
 conky.text = [[
 \
 \
-${execi 300 l=${template9}; l=${l%%_*}; curl -s "api.openweathermap.org/data/2.5/forecast/daily?APPID=${template6}&id=${template7}&cnt=5&units=${template8}&lang=$l" -o ~/.cache/forecast.json}\
-${execi 300 l=${template9}; l=${l%%_*}; curl -s "api.openweathermap.org/data/2.5/weather?APPID=${template6}&id=${template7}&cnt=5&units=${template8}&lang=$l" -o ~/.cache/weather.json}\
+${execi 300 ~/.harmattan-assets/get_weather ${template6} ${template7} ${template8} ${template9}}\
+\
 \
 \
 \
@@ -110,20 +110,20 @@ ${color1}${voffset -15}${alignc -77}${execi 300 LANG=${template9} LC_TIME=${temp
 \
 \
 \
-${color1}${voffset 53}${alignc 77}${execi 300 jq -r .list[0].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}/${execi 300 jq -r .list[0].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}
-${color1}${voffset -15}${alignc}${execi 300 jq -r .list[1].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}/${execi 300 jq -r .list[1].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}
-${color1}${voffset -15}${alignc -77}${execi 300 jq -r .list[2].temp.min ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}/${execi 300 jq -r .list[2].temp.max ~/.cache/forecast.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}
+${color1}${voffset 53}${alignc 77}${execi 300 ~/.harmattan-assets/parse_weather 'avg' '.main.temp_min' '0'}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}/${execi 300 ~/.harmattan-assets/parse_weather 'avg' '.main.temp_max' '0'}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}
+${color1}${voffset -15}${alignc}${execi 300 ~/.harmattan-assets/parse_weather 'avg' '.main.temp_min' '1'}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}/${execi 300 ~/.harmattan-assets/parse_weather 'avg' '.main.temp_max' '1'}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}
+${color1}${voffset -15}${alignc -77}${execi 300 ~/.harmattan-assets/parse_weather 'avg' '.main.temp_min' '2'}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}/${execi 300 ~/.harmattan-assets/parse_weather 'avg' '.main.temp_max' '2'}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}
 \
 \
 \
 \
-${color1}${font Droid Sans:size=48}${goto 32}${voffset -204}${execi 300 jq -r .main.temp ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}${font}\
-${color1}${alignr 54}${voffset -162}${execi 300 jq -r .main.pressure ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa
-${color1}${alignr 54}${voffset 20}${execi 300 jq -r .main.humidity ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %
-${color1}${alignr 54}${voffset 20}${execi 300 jq -r .wind.speed ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} m/s${else}${if_match "$template8" == "default"} m/s${else}${if_match "$template8" == "imperial"} mi/h${endif}${endif}${endif}
-${color1}${alignr 54}${voffset 20}${execi 300 date -d "@$(jq -r .sys.sunrise ~/.cache/weather.json)" +%-I:%M\ %P}
-${color1}${alignr 54}${voffset 20}${execi 300 date -d "@$(jq -r .sys.sunset ~/.cache/weather.json)" +%-I:%M\ %P}
-${color1}${font Droid Sans :size=12}${goto 46}${voffset 26}${execi 300 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${font}\
+${color1}${font Droid Sans:size=48}${goto 32}${voffset -204}${execi 300 jq -r .main.temp ~/.cache/harmattan-conky/weather.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}${font}\
+${color1}${alignr 54}${voffset -162}${execi 300 jq -r .main.pressure ~/.cache/harmattan-conky/weather.json | awk '{print int($1+0.5)}' # round num} hPa
+${color1}${alignr 54}${voffset 20}${execi 300 jq -r .main.humidity ~/.cache/harmattan-conky/weather.json | awk '{print int($1+0.5)}' # round num} %
+${color1}${alignr 54}${voffset 20}${execi 300 jq -r .wind.speed ~/.cache/harmattan-conky/weather.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} m/s${else}${if_match "$template8" == "default"} m/s${else}${if_match "$template8" == "imperial"} mi/h${endif}${endif}${endif}
+${color1}${alignr 54}${voffset 20}${execi 300 date -d "@$(jq -r .sys.sunrise ~/.cache/harmattan-conky/weather.json)" +%-I:%M\ %P}
+${color1}${alignr 54}${voffset 20}${execi 300 date -d "@$(jq -r .sys.sunset ~/.cache/harmattan-conky/weather.json)" +%-I:%M\ %P}
+${color1}${font Droid Sans :size=12}${goto 46}${voffset 26}${execi 300 jq -r .weather[0].description ~/.cache/harmattan-conky/weather.json | sed "s|\<.|\U&|g"}${font}\
 \
 \
 \
@@ -133,8 +133,8 @@ ${image ~/.harmattan-assets/misc/Brown-Card/Comfortable/humidity.png -p 224,74 -
 ${image ~/.harmattan-assets/misc/Brown-Card/Comfortable/wind-2.png -p 224,111 -s 16x16}\
 ${image ~/.harmattan-assets/misc/Brown-Card/Comfortable/sunrise.png -p 224,148 -s 16x16}\
 ${image ~/.harmattan-assets/misc/Brown-Card/Comfortable/sunset.png -p 224,185 -s 16x16}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__64/$(jq .weather[0].id ~/.cache/weather.json).png ~/.cache/weather.png}${image ~/.cache/weather.png -p 32,46 -s 64x64}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__32/$(jq .list[0].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 42,296 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__32/$(jq .list[1].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 118,296 -s 32x32}\
-${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__32/$(jq .list[2].weather[0].id ~/.cache/forecast.json).png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 194,296 -s 32x32}${font}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__64/$(jq .weather[0].id ~/.cache/harmattan-conky/weather.json).png ~/.cache/harmattan-conky/weather.png}${image ~/.cache/harmattan-conky/weather.png -p 32,46 -s 64x64}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__32/$(~/.harmattan-assets/parse_weather 'first' '.weather[0].id' '0').png ~/.cache/harmattan-conky/weather-1.png}${image ~/.cache/harmattan-conky/weather-1.png -p 42,296 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__32/$(~/.harmattan-assets/parse_weather 'first' '.weather[0].id' '1').png ~/.cache/harmattan-conky/weather-2.png}${image ~/.cache/harmattan-conky/weather-2.png -p 118,296 -s 32x32}\
+${execi 300 cp -f ~/.harmattan-assets/icons/#e5ded0__32/$(~/.harmattan-assets/parse_weather 'first' '.weather[0].id' '2').png ~/.cache/harmattan-conky/weather-3.png}${image ~/.cache/harmattan-conky/weather-3.png -p 194,296 -s 32x32}${font}\
 ]]

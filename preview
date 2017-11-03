@@ -11,7 +11,7 @@ trap ctrl_c INT
 declare -a themePaths
 for theme in $(find .harmattan-themes -mindepth 1 -maxdepth 1 -type d | sort)
 do
-  themePaths+=($theme)
+  themePaths+=("$theme")
 done
 
 declare -A unitMap=(
@@ -40,24 +40,24 @@ function update() {
   echo ''
   newTheme="${themePaths[$xindex]}/${sizes[$yindex]}/${modes[$mindex]}/.conkyrc"
 
-  shortTheme=$(basename ${themePaths[$xindex]})
+  shortTheme=$(basename "${themePaths[$xindex]}")
   echo "switching to $shortTheme,${sizes[$yindex]},${modes[$mindex]}"
-  if [ ! -f $newTheme ]
+  if [ ! -f "$newTheme" ]
   then
     newTheme="${themePaths[$xindex]}/${sizes[$yindex]}/.conkyrc"
-    if [ ! -f $newTheme ]
+    if [ ! -f "$newTheme" ]
     then
       echo "couldn't find .conkyrc file for this combination"
       return
     fi
   fi
-  cp $newTheme ~/.conkyrc
+  cp "$newTheme" ~/.conkyrc
 }
 
 function install() {
   while true
   do
-    read -p "Enter your OpenWeatherMap API key:" apiKey
+    read -rp "Enter your OpenWeatherMap API key:" apiKey
     if [[ ! $apiKey =~ ^[a-zA-Z0-9]+$ ]]
     then
       echo 'API key must be only alphanumeric characters.'
@@ -68,7 +68,7 @@ function install() {
 
   while true
   do
-    read -p "Enter your OpenWeatherMap Location ID:" locationID
+    read -rp "Enter your OpenWeatherMap Location ID:" locationID
     if [[ ! $locationID =~ ^[0-9]+$ ]]
     then
       echo 'Location ID must be a number.'
@@ -79,8 +79,8 @@ function install() {
 
   while true
   do
-      read -p "Choose unit type ('celsius', 'kelvin' or 'fahrenheit'): " unitType
-    if [[ ! "celsius kelvin fahrenheit" =~ "${unitType}" ]]
+      read -rp "Choose unit type ('celsius', 'kelvin' or 'fahrenheit'): " unitType
+    if [[ ! "celsius kelvin fahrenheit" =~ ${unitType} ]]
     then
       echo "Spelling error. Options are: 'celsius', 'kelvin' or 'fahrenheit'."
     else
@@ -102,7 +102,7 @@ function revert() {
   if $revertToggle
   then
     echo 'reverting config'
-    cp ~/.conkyrc-$dateString ~/.conkyrc
+    cp ~/".conkyrc-$dateString" ~/.conkyrc
   else
     echo 'no config to revert to'
   fi
@@ -134,13 +134,13 @@ then
   cp .harmattan-themes/Brown-Card/God-Mode/normal-mode/.conkyrc ~/
 else
   echo "Conky file found, backing up to ~/.conkyrc-$dateString"
-  cp ~/.conkyrc ~/.conkyrc-$dateString
+  cp ~/.conkyrc ~/".conkyrc-$dateString"
   revertToggle=true
 fi
 
 # Check for process
 PID=$(ps -ef | grep [c]onky | awk {'print $2'})
-if [ -z $PID ]
+if [ -z "$PID" ]
 then
   echo 'Conky not running, starting it'
   conky -q
@@ -150,7 +150,7 @@ fi
 helpText
 while true
 do
-  read -n1 -p ':> ' key
+  read -rn1 -p ':> ' key
   case $key in
     h)
       xindex=$(( ( xindex + 1) % xmax ))
