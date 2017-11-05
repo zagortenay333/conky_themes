@@ -1,6 +1,10 @@
 #!/bin/bash
 set -eu
 
+# Avoid errors on printf with systems with a locale that use the comma instead of
+# the dot for floats
+LANG=C
+
 forecast=~/".cache/harmattan-conky/forecast.json"
 
 get_time () {
