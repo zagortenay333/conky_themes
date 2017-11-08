@@ -1,10 +1,6 @@
 #!/bin/bash
 set -eu
 
-# Avoid errors on printf with systems with a locale that use the comma instead of
-# the dot for floats
-LANG=C
-
 forecast=~/".cache/harmattan-conky/forecast.json"
 
 get_time () {
@@ -79,7 +75,7 @@ get_avg_property () {
 
     [[ $res == "null" ]] && echo $res && return
 
-    printf %.0f $res
+    LC_NUMERIC=C printf %.0f $res
 }
 
 # Certain values cannot be averaged (e.g., the weather description).
@@ -97,7 +93,7 @@ get_first_property () {
 
     [[ $res == "null" ]] && echo $res && return
 
-    printf %.0f $res
+    LC_NUMERIC=C printf %.0f $res
 }
 
 main () {
