@@ -150,4 +150,4 @@ You can render a fresh set of weather icons in any color/size you want using the
 
 ---
 
-<img src="http://orig02.deviantart.net/f294/f/2016/232/e/b/conky_harmattan_by_zagortenay333-d720use.png" id="preview">
+<img src="https://i.imgur.com/VzSHa7P.png" id="preview">
