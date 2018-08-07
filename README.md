@@ -56,7 +56,7 @@ Place the API key in the `template6` variable inside the `.conkyrc`file.
 
 ### City
 
-[Find the ID of your city](http://openweathermap.org/help/city_list.txt) and place it inside the `template7` variable inside the `.conkyrc` file.
+[Find the ID of your city](http://bulk.openweathermap.org/sample/) and place it inside the `template7` variable inside the `.conkyrc` file.
 
 ---
 
