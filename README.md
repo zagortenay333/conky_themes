@@ -29,7 +29,7 @@ For older versions, check the available [releases](../../releases).
 
 ### Installation:
 
-* Install **conky**, **curl** and **jq**.
+* Install **conky**, **curl**, **jq** and **bc**.
   * On Ubuntu 16.04+, you may need to install `conky-all` instead of the transitional package `conky`.
 
 * Make sure you have the **Droid Sans** font installed.
