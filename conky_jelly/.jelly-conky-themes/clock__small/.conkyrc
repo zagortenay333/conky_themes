@@ -1,0 +1,87 @@
+conky.config = {
+
+-------------------------------------
+--  Generic Settings
+-------------------------------------
+background=true,
+update_interval=1,
+double_buffer=true,
+no_buffers=true,
+imlib_cache_size=10,
+
+draw_shades=false,
+draw_outline=false,
+draw_borders=false,
+
+
+-------------------------------------
+--  Window Specifications
+-------------------------------------
+gap_x=100,
+gap_y=70,
+
+minimum_height=100,
+minimum_width=280,
+
+own_window=true,
+own_window_type="normal",
+own_window_transparent=true,
+own_window_hints="undecorated,below,sticky,skip_taskbar,skip_pager",
+
+own_window_argb_visual=true,
+own_window_argb_value=0,
+
+
+-------------------------------------
+--  Text Settings
+-------------------------------------
+use_xft=true,
+xftalpha=1,
+font="Droid Sans:size=10",
+text_buffer_size=256,
+override_utf8_locale=true,
+
+
+-------------------------------------
+--  Color Scheme
+-------------------------------------
+default_color="FFFFFF",
+
+color0="FFFFFF",  --  hours
+color1="FFFFFF",  --  clock dots
+color2="FFFFFF",  --  minutes
+color3="FFFFFF",  --  week day
+color4="FFFFFF",  --  month day
+color5="FFFFFF",  --  month
+
+
+-------------------------------------
+--  Locale (e.g. "es_ES.UTF-8")
+--  Leave empty for default
+-------------------------------------
+template9=""
+
+}
+
+
+-------------------------------------
+-------------------------------------
+
+
+conky.text = [[
+\
+\
+${font Roboto :size=42}${color0}\
+${alignc}${time %H}\
+\
+\
+\
+\
+${font Roboto Thin :size=42}${color1}:\
+\
+\
+\
+\
+${font Roboto Thin :size=42}${color2}\
+${time %M}${font}${color}
+]]

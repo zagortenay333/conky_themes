@@ -1,0 +1,27 @@
+#!/bin/bash
+set -eu
+
+cp -r .conky-vision ~/
+mkdir -p ~/.cache/conky-vision
+
+read -rp 'Enter your OpenWeatherMap API key: ' api_key
+
+if [ -z "$api_key" ]; then
+    read -rp 'Enter your locale (leave empty for default): ' locale
+    sed "s|template9=\"\"|template9=\"$locale\"|" .conkyrc-noweather > ~/.conkyrc
+else
+    sed "s|template6=\"\"|template6=\"$api_key\"|" .conkyrc > .conkyrc-tmp
+
+    read -rp 'Enter your city id: ' city_id
+    sed -i "s|template7=\"\"|template7=\"$city_id\"|" .conkyrc-tmp
+
+    read -rp 'Enter your unit system (default, metric, imperial): ' unit_system
+    sed -i "s|template8=\"\"|template8=\"$unit_system\"|" .conkyrc-tmp
+
+    read -rp 'Enter your locale (leave empty for default): ' locale
+    sed "s|template9=\"\"|template9=\"$locale\"|" .conkyrc-tmp > ~/.conkyrc
+
+    rm .conkyrc-tmp
+fi
+
+echo 'Installation complete.'

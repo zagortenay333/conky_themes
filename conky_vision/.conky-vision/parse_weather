@@ -1,0 +1,199 @@
+#!/bin/bash
+
+set -eu
+
+forecast=~/".cache/conky-vision/forecast.json"
+
+get_time () {
+    local idx="$1"
+
+    time=$(jq ".list[$idx].dt_txt" "$forecast")
+    time="${time##* }"
+    time="${time%%\"}"
+
+    echo "$time"
+}
+
+find_position () {
+    local day="$1"
+    local pos=0
+    local idx=0
+    local time=""
+
+    [[ $day == 0 ]] && echo "$idx" && return
+
+    while true; do
+        time=$(get_time "$idx")
+
+        [[ $time == "00:00:00" ]] && ((pos++))
+
+        [[ $time == "null" ]] && break
+        [[ $pos == "$day" ]] && break
+
+        ((idx++))
+    done
+
+    echo "$idx"
+}
+
+# Currently, the free accounts on openweathermap.org only get a 5 day forecast
+# with data records for every 3 hours instead of the average value for the day,
+# so we have to compute the average temp_min, temp_max, etc manually.
+get_avg_property () {
+    local res=0
+
+    local prop="$1"
+    local day="$2"
+
+    local idx
+    idx=$(find_position "$day")
+
+    local prop_num=0
+    local time=0
+    local it=0
+
+    while true; do
+        [[ $time == "null" ]] && break
+
+        it=$(jq ".list[$idx]$prop" "$forecast")
+
+        it="$res+$it"
+        res=$(bc -l <<< "$it")
+
+        (( prop_num++ ))
+        (( idx++ ))
+
+        time=$(get_time "$idx")
+
+        # The records for every 3 hours are dumped in an array with no
+        # indication to which day they belong.
+        # The first record of each day (except today) is calculated at time
+        # '00:00:00', so we use that to know when a new day starts.
+        [[ $time == "00:00:00" ]] && break
+    done
+
+    res="$(bc -l <<< "$res/$prop_num")"
+
+    [[ $res == "null" ]] && echo $res && return
+
+    LC_NUMERIC=C printf %.0f $res
+}
+
+get_min_property () {
+    local res=0
+
+    local prop="$1"
+    local day="$2"
+
+    local idx
+    idx=$(find_position "$day")
+
+    local time=0
+
+    local i=0
+
+    local outarray=()
+
+    while true; do
+        [[ $time == "null" ]] && break
+
+        outarray[$i]="$(jq ".list[$idx]$prop" "$forecast")"
+
+        (( i++ ))
+        (( idx++ ))
+
+        time=$(get_time "$idx")
+
+        # The records for every 3 hours are dumped in an array with no
+        # indication to which day they belong.
+        # The first record of each day (except today) is calculated at time
+        # '00:00:00', so we use that to know when a new day starts.
+        [[ $time == "00:00:00" ]] && break
+    done
+
+    IFS=$'\n'
+    res=($(sort -n<<<"${outarray[*]}" | head -n1))
+    unset IFS
+
+    [[ $res == "null" ]] && echo $res && return
+
+    LC_NUMERIC=C printf %.0f $res
+}
+
+get_max_property () {
+    local res=0
+
+    local prop="$1"
+    local day="$2"
+
+    local idx
+    idx=$(find_position "$day")
+
+    local time=0
+
+    local i=0
+
+    local outarray=()
+
+    while true; do
+        [[ $time == "null" ]] && break
+
+        outarray[$i]="$(jq ".list[$idx]$prop" "$forecast")"
+
+        (( i++ ))
+        (( idx++ ))
+
+        time=$(get_time "$idx")
+
+        # The records for every 3 hours are dumped in an array with no
+        # indication to which day they belong.
+        # The first record of each day (except today) is calculated at time
+        # '00:00:00', so we use that to know when a new day starts.
+        [[ $time == "00:00:00" ]] && break
+    done
+    IFS=$'\n'
+    res=($(sort -nr <<<"${outarray[*]}" | head -n1))
+
+    unset IFS
+
+    [[ $res == "null" ]] && echo $res && return
+
+    LC_NUMERIC=C printf %.0f $res
+}
+
+# Certain values cannot be averaged (e.g., the weather description).
+# In that case we just use the value from the first record for that day.
+get_first_property () {
+
+    local res=0
+
+    local prop="$1"
+    local day="$2"
+
+    local idx
+    idx=$(find_position "$day")
+
+    res=$(jq ".list[$idx]$prop" "$forecast")
+
+    [[ $res == "null" ]] && echo $res && return
+
+    LC_NUMERIC=C printf %.0f $res
+}
+
+main () {
+    type="$1"
+    prop="$2"
+    day="$3"
+
+    if [[ $type == "avg" ]] ; then
+        echo "$(get_avg_property "$2" "$3")"
+    elif [[ $type == "min" ]] ; then
+        echo "$(get_min_property "$2" "$3")"
+    elif [[ $type == "max" ]] ; then
+        echo "$(get_max_property "$2" "$3")"
+    elif [[ $type == "first" ]] ; then
+        echo "$(get_first_property "$2" "$3")"
+    fi
+}
+
+[[ -r $forecast ]] && main "$@"

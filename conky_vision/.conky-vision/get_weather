@@ -1,0 +1,21 @@
+#!/bin/bash
+set -eu
+
+# It seems that in conky the execi command will start before curl has completely
+# written the file. For some reason adding a sleep before calling curl fixes it.
+sleep 2 
+
+forecast=~/".cache/conky-vision/forecast.json"
+weather=~/".cache/conky-vision/weather.json"
+
+mkdir -p ~/".cache/conky-vision"
+
+api_prefix="api.openweathermap.org/data/2.5/"
+
+appid="APPID=$1"
+id="&id=$2"
+units="&units=$3"
+lang="" ; [[ -v 4 ]] && lang="${4%%_*}" lang="&lang=$lang"
+
+curl -s "${api_prefix}forecast?${appid}${id}${units}${lang}" -o "$forecast"
+curl -s "${api_prefix}weather?${appid}${id}${units}${lang}" -o "$weather"

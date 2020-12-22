@@ -1,0 +1,116 @@
+#!/bin/bash
+
+# ======================================
+# ANSI
+# ======================================
+ansi_reset='\e[0m'
+
+bold='\e[1m'
+
+blue='\e[34m'
+
+yellow_b='\e[1;33m'
+
+red_b='\e[1;31m'
+
+darkgray_b='\e[1;90m'
+
+
+# ======================================
+#   Constants
+# ======================================
+svg_src="SVG"
+
+png_dest=".conky-vision-icons"
+
+default_color="#000"
+
+default_size="32"
+
+
+# ======================================
+# User Input
+# ======================================
+echo
+
+echo -e "${bold}Enter icon icon_size (skip for default): ${ansi_reset}"
+read -r icon_size
+
+echo -e "${bold}Enter 1 or more colors (space or tab separated): ${ansi_reset}"
+read -r -a icon_colors
+
+
+# ======================================
+# Checks
+# ======================================
+# If no colors given, add default color to array
+[ ${#icon_colors[*]} -eq 0 ] && icon_colors[0]="$default_color"
+
+mkdir -p "$png_dest"
+
+icon_size=${icon_size:-"$default_size"}
+
+
+# ======================================
+# RENDER
+# ======================================
+for color in ${icon_colors[*]}; do
+    echo
+    echo -e "${darkgray_b}---------------------------------------${ansi_reset}"
+
+
+    # Check whether the png folder already exits
+    if [ -d "$png_dest/${color}__$icon_size" ]; then
+        echo
+        echo -e "${red_b}$png_dest/${color}__$icon_size exists!${ansi_reset}"
+        continue
+    fi
+
+
+    mkdir -p "${color}__$icon_size"
+
+
+    trap 'sed -i "s/<path fill=\"$color\"/<path/" $svg_src/*.svg; exit' INT TERM
+
+
+    sed -i "s/<path/<path fill=\"$color\"/" "$svg_src"/*.svg
+
+
+    # Loop through SVG folder & render png's
+    for i in $svg_src/*.svg; do
+
+        # Get basename
+        i2=${i##*/}  i2=${i2%.*}
+
+        # If png exists, skip
+        if [ -f "${color}__$icon_size/$i2.png" ]; then
+            echo
+            echo -e "${darkgray_b}${color}__$icon_size/$i2.png exists.${ansi_reset}"
+
+        else
+            echo
+            echo -e "${blue}Rendering ${yellow_b}${color}__$icon_size/$i2.png${ansi_reset}"
+
+            inkscape -e "${color}__$icon_size/$i2.png" "$i" \
+                     --export-width="$icon_size" --export-height="$icon_size" &> /dev/null
+        fi
+    done
+
+
+    # Inkscape has trouble exporting into
+    # arbitrary depth paths, so move manually
+    mv "${color}__$icon_size" "$png_dest"
+
+
+    # Revert edit of svg's before next iteration or EXIT
+    sed -i "s/<path fill=\"$color\"/<path/" "$svg_src"/*.svg
+
+done
+
+
+# If notify-send installed, send notif
+hash notify-send 2>/dev/null &&
+notify-send -i 'terminal' \
+            -a 'Terminal' \
+            'Terminal'    \
+            'Finished rendering icons!'

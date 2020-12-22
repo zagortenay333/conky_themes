@@ -1,0 +1,164 @@
+conky.config = {
+
+-------------------------------------
+--  Generic Settings
+-------------------------------------
+background=true,
+update_interval=1,
+double_buffer=true,
+no_buffers=true,
+
+draw_shades=false,
+draw_outline=false,
+draw_borders=false,
+
+
+-------------------------------------
+--  Window Specifications
+-------------------------------------
+gap_x=100,
+gap_y=70,
+
+minimum_height=250,
+minimum_width=360,
+
+own_window=true,
+own_window_type="normal",
+own_window_transparent=true,
+own_window_hints="undecorated,below,sticky,skip_taskbar,skip_pager",
+
+own_window_argb_visual=true,
+own_window_argb_value=0,
+
+
+-------------------------------------
+--  Text Settings
+-------------------------------------
+use_xft=true,
+xftalpha=1,
+font="Droid Sans:size=10",
+text_buffer_size=256,
+override_utf8_locale=true,
+
+
+-------------------------------------
+--  Color Scheme
+-------------------------------------
+default_color="FFFFFF",
+
+color0="FFFFFF",  --  hours
+color1="FFFFFF",  --  clock dots
+color2="FFFFFF",  --  minutes
+color3="FFFFFF",  --  week day
+color4="FFFFFF",  --  month day
+color5="FFFFFF",  --  month
+color6="FFFFFF",  --  current temp
+color7="FFFFFF",  --  min temp
+color8="FFFFFF",  --  max temp
+color9="FFFFFF",  --  current conditions
+
+
+-------------------------------------
+--  Icon Sources
+-------------------------------------
+template0="~/.jelly-conky/#fff__64",
+
+
+-------------------------------------
+--  API Key
+-------------------------------------
+template6="",
+
+
+-------------------------------------
+--  City ID
+-------------------------------------
+template7="",
+
+
+-------------------------------------
+--  Temp Unit (default, metric, imperial)
+-------------------------------------
+template8="metric",
+
+
+-------------------------------------
+--  Locale (e.g. "es_ES.UTF-8")
+--  Leave empty for default
+-------------------------------------
+template9=""
+
+}
+
+
+-------------------------------------
+-------------------------------------
+
+
+conky.text = [[
+\
+\
+${execi 300 ~/.jelly-conky/get_weather ${template6} ${template7} ${template8} ${template9}}\
+\
+\
+\
+\
+${font Roboto :size=64}${color0}\
+${alignc}${time %H}\
+\
+\
+\
+\
+${font Roboto Thin :size=64}${color1}:\
+\
+\
+\
+\
+${font Roboto Thin :size=64}${color2}\
+${time %M}${font}${color}
+\
+\
+\
+\
+${font Roboto Light :size=16}${color3}\
+${voffset 12}${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date +"%A"}${color}, \
+\
+\
+\
+\
+${font Roboto :size=16}${color4}\
+${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date +"%d"}${color} \
+\
+\
+\
+\
+${font Roboto Light :size=16}${color5}\
+${alignc}${execi 300 LANG=${template9} LC_TIME=${template9} date +"%B"}${font}${color}
+\
+\
+\
+\
+${font Roboto Light :size=24}${color6}\
+${goto 70}${voffset 18}\
+${execi 300 jq ".main.temp" ~/.cache/jelly-conky/weather.json | awk '{print int($1+0.5)}' # round num}°${font}${color}
+\
+\
+\
+\
+${font Roboto Light :size=12}\
+${goto 70}${voffset 5}\
+${color7}${execi 300 ~/.jelly-conky/parse_weather 'avg' '.main.temp_min' '0'}° ${color}| \
+${color8}${execi 300 ~/.jelly-conky/parse_weather 'avg' '.main.temp_max' '0'}°${font}${color}
+\
+\
+\
+\
+${font Roboto Light :size=12}${color9}\
+${goto 70}${voffset 5}\
+${execi 300 jq -r ".weather[0].description" ~/.cache/jelly-conky/weather.json}${font}${color}
+\
+\
+\
+\
+${execi 300 cp -f ${template0}/$(jq .weather[0].id ~/.cache/jelly-conky/weather.json).png ~/.cache/jelly-conky/current.png}${image ~/.cache/jelly-conky/current.png -p 236,140 -s 64x64}\
+]]
